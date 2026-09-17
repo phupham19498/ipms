@@ -3,13 +3,39 @@
 | Thuộc tính | Nội dung |
 | --- | --- |
 | Mã tài liệu | `IPMS-UAT-WALKTHROUGH` |
-| Phiên bản | `1.1` |
+| Phiên bản | `1.7` |
 | Trạng thái | Lưu hành chính thức cho vòng UAT web MVP |
-| Ngày ban hành | 2026-09-16 |
+| Ngày ban hành | 2026-09-17 |
 | Chủ sở hữu | Business Analyst / QA Coordination |
 | Đối tượng sử dụng | BA, QA, tester UAT, đại diện nghiệp vụ khách hàng, đội triển khai |
-| Phạm vi hệ thống | IPMS web MVP, API native, dữ liệu seed phục vụ UAT |
+| Phạm vi hệ thống | IPMS web MVP, API native, dữ liệu seed nhập tay phục vụ UAT |
+| Nguồn seed chuẩn | `documents/uat-manual-seed-data.md` — bộ `UAT-KCN-01 / Công ty cổ phần IIT` |
 | Mức bảo mật | Nội bộ dự án; không chuyển tiếp ra ngoài phạm vi UAT nếu chưa được PM/PO phê duyệt |
+
+> **Cách đưa lên Notion:** vào Notion → Settings → Import → Markdown rồi chọn file này (giữ nguyên bảng, code, heading), hoặc copy-paste toàn bộ vào một trang trắng. Tài liệu dài (~1200 dòng) nên có thể tách thành 1 trang mẹ + từng mục 0–15 thành subpage. Sau khi import: xóa mục `Mục lục` bên dưới và chèn block Table of Contents của Notion; hai bảng ở mục 14.2/14.3 có thể chuyển thành Board view để tick theo dõi.
+
+## Mục lục
+
+- 0. Quản lý tài liệu
+- 1. Điều kiện chuẩn bị UAT
+- 2. Nguyên tắc thực hiện và ghi nhận kết quả
+- 3. Bộ dữ liệu seed chuẩn và cách đối chiếu
+- 4. Kiểm tra khởi động phiên UAT (UAT-00)
+- 5. Quản trị hệ thống (UAT-01)
+- 6. Quản lý khách hàng (UAT-02)
+- 7. Hợp đồng (UAT-03)
+- 8. Hạ tầng, tài sản và GIS (UAT-04)
+- 9. Tính phí và tài chính (UAT-05)
+- 10. Phiếu yêu cầu, SLA và thông báo (UAT-06)
+- 11. E-invoice, chữ ký số và provider boundary (UAT-07)
+- 12. Báo cáo và xuất file (UAT-08)
+- 13. Phân quyền và audit (UAT-09)
+- 14. Điều kiện sign-off UAT
+- 15. Cấu hình quyền cho từng vai trò
+- Phụ lục A. Đối chiếu bản 1.1 → 1.2 (lịch sử)
+- Phụ lục B. Công thức tính điện, nước, nước thải, rác, dịch vụ hạ tầng, tiền thuê
+
+---
 
 ## 0. Quản lý tài liệu
 
@@ -20,7 +46,7 @@ Tài liệu áp dụng cho các phân hệ web MVP sau:
 | Nhóm | Phân hệ |
 | --- | --- |
 | Nền tảng | Đăng nhập, dashboard, điều hướng, phân quyền, audit |
-| Nghiệp vụ lõi | Khách hàng, hợp đồng, lô đất/nhà xưởng, tài sản, hạ tầng, GIS |
+| Nghiệp vụ lõi | Khách hàng, hợp đồng, lô đất/GIS, tài sản, hạ tầng |
 | Vận hành | Tính phí, tài chính/công nợ, phiếu yêu cầu, SLA, thông báo |
 | Tích hợp biên | E-invoice, chữ ký số, provider boundary ở chế độ không gọi provider thật |
 | Báo cáo | Báo cáo tổng quan, export Excel/PDF, lịch sử export |
@@ -40,13 +66,20 @@ Tài liệu áp dụng cho các phân hệ web MVP sau:
 
 1. Mỗi thay đổi nội dung chính thức phải cập nhật ngày ban hành hoặc ghi thêm dòng vào lịch sử thay đổi.
 2. Không chỉnh sửa trực tiếp kết quả UAT đã được ký xác nhận; nếu cần điều chỉnh, tạo phụ lục hoặc biên bản đính chính.
-3. Khi có migration, seed hoặc quyền truy cập thay đổi, QA/Test Lead phải xác nhận lại phần `Môi trường và tài khoản` trước khi phát hành cho tester.
-4. Tài liệu này không thay thế release gate, security checklist, performance checklist hoặc biên bản nghiệm thu chính thức.
+3. Khi có migration, seed tay hoặc quyền truy cập thay đổi, QA/Test Lead phải xác nhận lại phần `Môi trường và tài khoản` trước khi phát hành cho tester.
+4. Bộ seed chuẩn duy nhất cho walkthrough này là `documents/uat-manual-seed-data.md`. Mọi mã `TN-*`, `KCN-TRA-NOC`, `IPMS-PARK-01/Bắc An`, `T07/T08/T09/T11/T12` của bản 1.1 không còn là seed chuẩn; nếu cần đối chiếu hồi quy thì ghi rõ là dữ liệu ngoài phạm vi bản 1.2.
+5. Tài liệu này không thay thế release gate, security checklist, performance checklist hoặc biên bản nghiệm thu chính thức.
 
 ### 0.4 Lịch sử thay đổi
 
 | Phiên bản | Ngày | Người thực hiện | Nội dung |
 | --- | --- | --- | --- |
+| 1.7 | 2026-09-17 | BA / QA | Chuẩn hóa trình bày thân thiện Notion: thêm hướng dẫn import + Mục lục, đường kẻ phân cách các phần lớn, giữ nguyên nội dung nghiệp vụ. |
+| 1.6 | 2026-09-17 | BA / QA | Viết lại luồng sử dụng Tài chính công nợ cho người không chuyên: giải thích phải thu/thanh toán/phân bổ/chưa phân bổ/điều chỉnh/khóa kỳ/NCC theo đúng tab UI, kèm ví dụ IIT từng bước. |
+| 1.5 | 2026-09-17 | BA / QA | Bổ sung Phụ lục B công thức tính điện/nước/nước thải/rác/dịch vụ hạ tầng/tiền thuê đầy đủ kèm chú thích, ví dụ số IIT và cách đối chiếu khi số live khác số seed. |
+| 1.4 | 2026-09-17 | BA / QA | Bổ sung giải thích tính năng chi tiết cho từng phân hệ (UAT-00 đến UAT-09): tính năng là gì, hoạt động thế nào, liên quan dữ liệu nào trong bộ `UAT-KCN-01 / IIT`, ví dụ và lỗi hay gặp để tester không kỹ thuật vẫn hiểu. |
+| 1.3 | 2026-09-17 | BA / QA | Bổ sung mục 15 cấu hình quyền chi tiết cho người không kỹ thuật (5 vai trò, phạm vi, ma trận xem/làm, cách tạo user, cách kiểm tra và lỗi hay gặp với bộ `UAT-KCN-01 / IIT`). |
+| 1.2 | 2026-09-17 | BA / QA | Chuyển toàn bộ seed chuẩn sang `uat-manual-seed-data.md` (bộ `UAT-KCN-01 / IIT`); loại bỏ phụ thuộc seed Trà Nóc/Bắc An; cập nhật mọi case UAT-00 đến UAT-09 theo mã UAT tay. |
 | 1.1 | 2026-09-16 | BA / Codex | Sắp xếp lại cấu trúc trình bày, bổ sung luồng nghiệp vụ, ma trận dữ liệu seed Trà Nóc/Bắc An và chuẩn hóa cách dùng tài liệu cho các bên triển khai. |
 | 1.0 | 2026-09-16 | BA / Codex | Chuẩn hóa thành tài liệu lưu hành chính thức, bổ sung kiểm soát tài liệu, phạm vi, vai trò, điều kiện UAT và sign-off. |
 
@@ -54,26 +87,31 @@ Tài liệu áp dụng cho các phân hệ web MVP sau:
 
 | Phần | Nội dung | Người đọc chính | Cách sử dụng |
 | --- | --- | --- | --- |
-| 1 | Điều kiện chuẩn bị UAT | PM/PO, BA, QA/Test Lead | Xác nhận môi trường, tài khoản và dữ liệu trước khi mở phiên UAT |
+| 1 | Điều kiện chuẩn bị UAT | PM/PO, BA, QA/Test Lead | Xác nhận môi trường, tài khoản và dữ liệu nhập tay trước khi mở phiên UAT |
 | 2 | Nguyên tắc ghi nhận kết quả | QA/Test Lead, tester UAT | Thống nhất cách ghi trạng thái, bằng chứng và dữ liệu tester tự tạo |
-| 3 | Bộ dữ liệu seed chuẩn | BA, QA, tester, đại diện nghiệp vụ | Tra mã dữ liệu khi thực hiện case hoặc đối chiếu lỗi |
-| 4 đến 13 | Walkthrough nghiệp vụ | Tester UAT, BA, đại diện nghiệp vụ | Thực hiện từng case theo màn hình/phân hệ của hệ thống |
+| 3 | Bộ dữ liệu seed chuẩn (từ `uat-manual-seed-data.md`) | BA, QA, tester, đại diện nghiệp vụ | Tra mã dữ liệu khi thực hiện case hoặc đối chiếu lỗi |
+| 4 đến 13 | Walkthrough nghiệp vụ + giải thích tính năng | Tester UAT, BA, đại diện nghiệp vụ | Đọc phần `Tính năng này là gì` ở đầu mỗi mục để hiểu cách hoạt động, sau đó thực hiện từng case theo màn hình/phân hệ |
 | 14 | Điều kiện sign-off UAT | PM/PO, QA/Test Lead, đại diện nghiệp vụ | Tổng hợp kết quả và xác nhận điều kiện ký UAT |
+| 15 | Cấu hình quyền cho từng vai trò (không cần kỹ thuật) | Đại diện nghiệp vụ, tester UAT, QA | Hiểu mỗi vai trò được thấy/làm gì, cách tạo user đúng, cách tự kiểm tra bằng bộ `UAT-KCN-01 / IIT` |
+| Mục lục | Điều hướng nhanh toàn tài liệu | Mọi độc giả | Tìm đúng mục cần đọc; khi lên Notion thì xóa mục này và chèn block Table of Contents |
+| Phụ lục B | Công thức tính điện/nước/nước thải/rác/dịch vụ/tiền thuê | Tester UAT, đại diện nghiệp vụ, QA | Tra công thức + chú thích + ví dụ số IIT khi test UAT-05; khi số live khác số seed thì đối chiếu theo phụ lục này |
 
 ### 0.6 Luồng nghiệp vụ tổng quát
 
-Tài liệu được sắp theo chuỗi nghiệp vụ mà một khu công nghiệp vận hành trên IPMS:
+Tài liệu được sắp theo chuỗi nghiệp vụ nhập tay trong `uat-manual-seed-data.md`:
 
-1. Chuẩn bị môi trường, tài khoản và phạm vi dữ liệu.
+1. Chuẩn bị môi trường, tài khoản và nhập seed tay KCN UAT.
 2. Kiểm tra nền tảng đăng nhập, dashboard, điều hướng và phân quyền.
-3. Quản lý dữ liệu nền khu/cụm, user và phạm vi truy cập.
-4. Quản lý khách hàng, liên hệ và hồ sơ pháp lý.
-5. Quản lý hợp đồng, tài liệu, line item và lịch thanh toán.
-6. Quản lý lô đất, nhà xưởng, tài sản, hạ tầng và bản đồ GIS.
-7. Tính phí, phát sinh công nợ, ghi nhận thanh toán và đối soát tài chính.
-8. Tiếp nhận phiếu yêu cầu, xử lý SLA, gửi thông báo và ghi nhận audit.
-9. Kiểm tra báo cáo, export file, eInvoice và chữ ký số ở mức provider boundary.
+3. Quản lý dữ liệu nền KCN/cụm, GIS/lô đất, hạ tầng, tài sản, user và phạm vi truy cập.
+4. Quản lý khách hàng IIT và hồ sơ pháp lý.
+5. Quản lý hợp đồng (thuê đất, thuê hạ tầng, dịch vụ điện/nước/rác), line item và điều khoản tài chính.
+6. Tính phí kỳ `UAT-KTP-T09`: biểu giá, đồng hồ, chỉ số, rác thải, run tính phí, thông báo phí.
+7. Phải thu, thanh toán và phân bổ công nợ IIT.
+8. Tiếp nhận phiếu yêu cầu, xử lý SLA, gửi thông báo và ghi nhận audit (tester tự tạo vì seed tay chưa có sẵn).
+9. Kiểm tra báo cáo, export file, eInvoice và chữ ký số ở mức provider boundary (tạo từ dữ liệu IIT).
 10. Tổng hợp bằng chứng, defect còn mở và điều kiện sign-off.
+
+---
 
 ## 1. Điều kiện chuẩn bị UAT
 
@@ -82,13 +120,13 @@ Tài liệu được sắp theo chuỗi nghiệp vụ mà một khu công nghi�
 | Điều kiện | Tiêu chí chấp nhận |
 | --- | --- |
 | Môi trường web/API | Web và API khởi động ổn định, không lỗi cấu hình nền ngay sau đăng nhập |
-| Database | Migration đã chạy đến ít nhất `V202609110002__uat_authorization_scope_hardening.sql` |
-| Seed UAT | Dữ liệu Trà Nóc và bộ dữ liệu T07/T09/T10/T11/T12 có thể tra cứu được |
-| Tài khoản | Tài khoản root, park admin và tenant user đăng nhập được bằng mật khẩu seed được xác nhận |
+| Database | DB sạch hoặc đã migrate nền; không yêu cầu migration Trà Nóc/Bắc An (`V202609110001/0002`) nữa |
+| Seed UAT nhập tay | Đã nhập tay xong theo `documents/uat-manual-seed-data.md`: KCN `UAT-KCN-01`, cụm `UAT-LO-A/B`, GIS + lô `UAT-KCN-KD-01`, hạ tầng `UAT-KCN-HT-01`, tài sản `UAT_ASSET1`, khách `UAT_KCN-01`, hợp đồng `UAT-HD-*`, kỳ `UAT-KTP-T09`, biểu giá `BG-*-UAT-001`, đồng hồ `DH-*-UAT-001` |
+| Tài khoản | Tài khoản root đăng nhập được; các user phân quyền do tester/root tự tạo theo mục 1.2 đăng nhập được |
 | Browser | Dùng Chrome hoặc Edge bản ổn định; bật DevTools Network khi cần ghi lỗi API |
 | Bằng chứng | Tester có thư mục/biểu mẫu lưu ảnh màn hình, file export, log lỗi và defect log |
 
-Nếu một điều kiện bắt buộc chưa sẵn sàng, QA/Test Lead ghi trạng thái `Blocked by environment` hoặc `Blocked by credential` trước khi bắt đầu walkthrough.
+Nếu một điều kiện bắt buộc chưa sẵn sàng, QA/Test Lead ghi trạng thái `Blocked by environment` hoặc `Blocked by credential` trước khi bắt đầu walkthrough. Nếu seed tay chưa nhập đủ (ví dụ thiếu đồng hồ hoặc kỳ tính phí), ghi `Blocked by seed` + nêu mã còn thiếu.
 
 ### 1.2 Môi trường và tài khoản
 
@@ -99,20 +137,22 @@ Nếu một điều kiện bắt buộc chưa sẵn sàng, QA/Test Lead ghi tr�
 | Swagger | `http://localhost:3000/api/docs` |
 | Root admin | `admin@ipms.local` |
 | Mật khẩu root admin | `Admin@123456` |
-| Seed chuẩn cho manual test | `Khu công nghiệp Trà Nóc` |
-| Mã khu seed | `KCN-TRA-NOC` |
-| Migration seed | `V202609110001__tra_noc_manual_test_seed.sql`, `V202609110002__uat_authorization_scope_hardening.sql` |
+| Seed chuẩn cho manual test | `Khu công nghiệp UAT` |
+| Mã KCN seed tay | `UAT-KCN-01` |
+| Nguồn seed | `documents/uat-manual-seed-data.md` (nhập tay qua UI, không dùng SQL Trà Nóc/Bắc An) |
 
-Tài khoản seed để kiểm tra phân quyền:
+Tài khoản dùng để kiểm tra phân quyền (do root tạo trên UI, không còn dùng tài khoản `uat.tranoc.*`):
 
-| Email | Vai trò | Phạm vi | Mật khẩu quy ước |
+| Email quy ước | Vai trò | Phạm vi | Mật khẩu quy ước |
 | --- | --- | --- | --- |
 | `admin@ipms.local` | `ROOT_ADMIN` | Toàn hệ thống | `Admin@123456` |
-| `uat.tranoc.park.admin@ipms.local` | `PARK_ADMIN` | Khu công nghiệp Trà Nóc | `Demo@123456` |
-| `uat.tranoc.mekongxanh@ipms.local` | `ENTERPRISE_ADMIN` | Công ty TNHH Thực phẩm Mekong Xanh | `Demo@123456` |
-| `uat.tranoc.songhau@ipms.local` | `ENTERPRISE_USER` | Công ty TNHH Logistics Sông Hậu Demo | `Demo@123456` |
+| `uat.operator.kcn01@ipms.local` | `PARK_ADMIN` / vận hành khu | Khu công nghiệp UAT (`UAT-KCN-01`) | `Demo@123456` |
+| `uat.iit.admin@ipms.local` | `ENTERPRISE_ADMIN` | Công ty cổ phần IIT (`UAT_KCN-01`) | `Demo@123456` |
+| `uat.iit.user@ipms.local` | `ENTERPRISE_USER` | Công ty cổ phần IIT (`UAT_KCN-01`) | `Demo@123456` |
 
-Ghi chú: nếu môi trường test đổi mật khẩu seed khi rebuild, tester ghi `Blocked by credential` và báo lại QA/Test Lead để xác nhận hash/mật khẩu đang dùng.
+Ghi chú: nếu môi trường test đổi mật khẩu khi rebuild, tester ghi `Blocked by credential` và báo lại QA/Test Lead để xác nhận hash/mật khẩu đang dùng. Các email trên là quy ước đặt khi tạo user; nếu hệ thống đã có user khác tương đương phạm vi thì dùng user thực tế và ghi rõ email thực tế vào kết quả case.
+
+---
 
 ## 2. Nguyên tắc thực hiện và ghi nhận kết quả
 
@@ -124,7 +164,7 @@ Mỗi case cần ghi lại tối thiểu các thông tin sau. Trường `Bằng 
 | --- | --- |
 | Mã case | Ví dụ `UAT-02.03` |
 | Tài khoản | Email đang đăng nhập |
-| Dữ liệu dùng | Mã khu, mã doanh nghiệp, mã hợp đồng, mã ticket |
+| Dữ liệu dùng | Mã KCN, mã khách, mã hợp đồng, mã kỳ, mã đồng hồ, mã thông báo phí/phải thu |
 | Kết quả | `Pass`, `Fail`, `Blocked`, `Out of scope` |
 | Bằng chứng | Ảnh màn hình, file export, mã bản ghi, log/audit |
 | Ghi chú | Lỗi, API status, payload, thao tác tái hiện |
@@ -135,7 +175,7 @@ Mỗi case cần ghi lại tối thiểu các thông tin sau. Trường `Bằng 
 | --- | --- |
 | `Pass` | Thao tác thành công, dữ liệu hiển thị đúng ở màn hình liên quan |
 | `Fail` | Lỗi hệ thống, dữ liệu sai, trang trắng, lỗi quyền không hợp lý |
-| `Blocked` | Thiếu tài khoản, provider, template chính thức, môi trường hoặc dữ liệu ngoài phạm vi |
+| `Blocked` | Thiếu tài khoản, provider, template chính thức, môi trường hoặc seed tay chưa nhập đủ |
 | `Out of scope` | Không thuộc phạm vi web MVP/manual UAT hiện tại |
 
 ### 2.3 Quy tắc bằng chứng chính thức
@@ -148,521 +188,289 @@ Mỗi case cần ghi lại tối thiểu các thông tin sau. Trường `Bằng 
 
 ### 2.4 Quy tắc dữ liệu tester tự tạo
 
-Tiền tố dữ liệu tester tự tạo: dùng `UAT-YYYYMMDD-...` để dễ lọc và dọn sau test. Không sửa/xóa dữ liệu seed `TN-*` trừ khi case yêu cầu kiểm tra chỉnh sửa có chủ đích.
+Tiền tố dữ liệu tester tự tạo: dùng `UAT-YYYYMMDD-...` để dễ lọc và dọn sau test. Không sửa/xóa seed tay `UAT-KCN-01`, `UAT_KCN-01`, `UAT-KCN-KD-01`, `UAT-HD-*`, `UAT-KTP-T09`, `DH-*-UAT-001`, `TBP/REC-UAT-*` trừ khi case yêu cầu kiểm tra chỉnh sửa có chủ đích.
 
-Khi một case yêu cầu tạo mới nhưng màn hình chưa có đủ chức năng, tester ghi `Blocked`, nêu rõ màn hình/field bị thiếu và tiếp tục các bước đọc/đối chiếu bằng dữ liệu seed nếu còn thực hiện được.
+Khi một case yêu cầu tạo mới nhưng màn hình chưa có đủ chức năng, tester ghi `Blocked`, nêu rõ màn hình/field bị thiếu và tiếp tục các bước đọc/đối chiếu bằng dữ liệu seed tay nếu còn thực hiện được.
+
+---
 
 ## 3. Bộ dữ liệu seed chuẩn và cách đối chiếu
 
-Tester ưu tiên dùng `Khu công nghiệp Trà Nóc` để đi luồng nghiệp vụ lõi: quản trị, khách hàng, hồ sơ, lô đất/nhà xưởng, hợp đồng, lịch thanh toán, phải thu, thanh toán, ticket, thông báo và phân quyền tenant. Khi cần kiểm tra tạo mới, tạo thêm bản ghi `UAT-*` riêng.
+Nguồn duy nhất: `documents/uat-manual-seed-data.md`. Tester nhập tay theo đúng thứ tự file đó: KCN -> cụm -> GIS/lô đất -> hạ tầng -> tài sản -> khách hàng -> hợp đồng -> kỳ tính phí/biểu giá/đồng hồ/chỉ số/rác -> run tính phí/thông báo phí -> phải thu/thanh toán.
 
-Khi cần kiểm tra các luồng đã có dữ liệu seed sâu hơn như điện 3 khung giờ, COS phi, giấy báo phí, công nợ nhà cung cấp, import/export, PDF, SLA nâng cao, GIS liên kết, eInvoice và chữ ký số provider boundary, tester dùng bộ `Khu công nghiệp Bắc An` làm bộ đối chiếu chuẩn. Các mã Bắc An ở mục 3.7 đến 3.14 là một phần của cùng kế hoạch UAT, không phải dữ liệu ngoài tài liệu.
+Thứ tự nhập tay bắt buộc để không vỡ FK:
+
+`UAT-KCN-01` -> `UAT-LO-A/B` -> `GIS-UAT-KCN-LOT` + `GIS-UAT-KCN-KD-01` -> `UAT-KCN-KD-01` -> `UAT-KCN-HT-01` -> `UAT_ASSET1` -> `UAT_KCN-01` -> `UAT-HD-*` -> `UAT-KTP-T09` + `BG-*-UAT-001` + `DH-*-UAT-001` + chỉ số -> run `BR-UAT-KTP-T09-001` -> `TBP-UAT-KTP-T09-IIT` -> `REC-UAT-KTP-T09-IIT` -> `PAY-UAT-IIT-2026-10-001`.
 
 ### Hướng dẫn đọc bộ dữ liệu
 
-| Nhóm dữ liệu | Khu dùng chính | Khi nào dùng |
+| Nhóm dữ liệu | Mã chính | Khi nào dùng |
 | --- | --- | --- |
-| Walkthrough nghiệp vụ lõi | Trà Nóc | Dùng cho khách hàng, hợp đồng, lô đất, công nợ, thanh toán, ticket, notification và phân quyền tenant |
-| Regression/chuyên sâu | Bắc An | Dùng cho billing utility, provider boundary, báo cáo, import/export, GIS, SLA và tài chính nhà cung cấp |
-| Dữ liệu tester tự tạo | Mọi khu theo case | Dùng tiền tố `UAT-*`, không ghi đè mã seed chính thức |
+| Walkthrough nghiệp vụ lõi | `UAT-KCN-01`, `UAT_KCN-01`, `UAT-KCN-KD-01`, `UAT-HD-*`, `UAT-KTP-T09`, `DH-*-UAT-001`, `TBP/REC/PAY-UAT-*` | Dùng cho mọi case UAT-00 đến UAT-09 |
+| Dữ liệu tester tự tạo thêm | Tiền tố `UAT-*` (VD `UAT-CUS-20260917-01`, `UAT-DEPT-20260917-01`, `TCK-UAT-*`) | Dùng khi cần tạo mới, không ghi đè mã seed chuẩn |
+| Dữ liệu ngoài phạm vi bản 1.2 | `TN-*`, `KCN-TRA-NOC`, `IPMS-PARK-01/Bắc An`, `T07-T12` | Không dùng; chỉ đối chiếu hồi quy khi được yêu cầu riêng |
 
 ### 3.1 Khu và cụm
 
 | Loại | Mã | Tên | Trạng thái |
 | --- | --- | --- | --- |
-| Khu công nghiệp | `KCN-TRA-NOC` | Khu công nghiệp Trà Nóc | `active` |
-| Cụm/khu | `TRA-NOC-A` | Khu A - Trà Nóc 1 | `active` |
-| Cụm/khu | `TRA-NOC-B` | Khu B - Trà Nóc 2 | `active` |
+| Khu công nghiệp | `UAT-KCN-01` | Khu công nghiệp UAT | Đang hoạt động |
+| Cụm | `UAT-LO-A` | Lô A | Đang hoạt động |
+| Cụm | `UAT-LO-B` | Lô B | Đang hoạt động |
+
+KCN thuộc `UAT-KCN-01`, cụm thuộc KCN tương ứng theo file seed.
 
 ### 3.2 Doanh nghiệp
 
-| Mã | Tên doanh nghiệp | MST | Email | Điện thoại | Nhóm | Công nợ còn lại |
-| --- | --- | --- | --- | --- | --- | ---: |
-| `TN-CUST-001` | Công ty TNHH Thực phẩm Mekong Xanh | `1809001001` | `contact@mekongxanh.demo` | `02923801001` | `strategic` | 46,200,000 |
-| `TN-CUST-002` | Công ty Cổ phần Bao bì Hậu Giang Demo | `1809001002` | `admin@baobihaugiang.demo` | `02923801002` | `vip` | 326,700,000 |
-| `TN-CUST-003` | Công ty TNHH Logistics Sông Hậu Demo | `1809001003` | `ops@logisticssonghau.demo` | `02923801003` | `standard` | 66,000,000 |
-| `TN-CUST-004` | Công ty Cổ phần Cơ khí Tây Đô Demo | `1809001004` | `info@cokhitaydo.demo` | `02923801004` | `strategic` | 171,600,000 |
-| `TN-CUST-005` | Công ty TNHH Dược liệu Cửu Long Demo | `1809001005` | `legal@duoclieucuulong.demo` | `02923801005` | `standard` | 33,000,000 |
+| Mã | Tên doanh nghiệp | MST | Email | Điện thoại | Trạng thái |
+| --- | --- | --- | --- | --- | --- |
+| `UAT_KCN-01` | Công ty cổ phần IIT | `0319999999` | `finance.iit@example.test` | `0909000001` | Đang hoạt động |
 
-Liên hệ chính tương ứng:
+Thông tin pháp lý gợi ý khi form yêu cầu:
 
-| Doanh nghiệp | Người liên hệ | Chức danh | Email | Điện thoại |
-| --- | --- | --- | --- | --- |
-| `TN-CUST-001` | Nguyễn Minh Huy | Giám đốc | `huy.nguyen@mekongxanh.demo` | `0909001001` |
-| `TN-CUST-002` | Trần Thị Mai Anh | Tổng giám đốc | `maianh.tran@baobihaugiang.demo` | `0909001002` |
-| `TN-CUST-003` | Lê Quốc Bảo | Giám đốc vận hành | `bao.le@logisticssonghau.demo` | `0909001003` |
-| `TN-CUST-004` | Phạm Văn Tín | Chủ tịch HĐQT | `tin.pham@cokhitaydo.demo` | `0909001004` |
-| `TN-CUST-005` | Võ Thanh Phương | Giám đốc pháp chế | `phuong.vo@duoclieucuulong.demo` | `0909001005` |
+| Trường | Giá trị |
+| --- | --- |
+| Địa chỉ | Lô A, Khu công nghiệp UAT |
+| Người đại diện | Nguyễn Văn UAT |
+| Chức vụ | Giám đốc |
+| Ngành nghề | Sản xuất linh kiện công nghiệp |
+| KCN | Khu công nghiệp UAT (`UAT-KCN-01`) |
 
 ### 3.3 Hồ sơ khách hàng
 
-| Doanh nghiệp | Loại hồ sơ | Số hiệu | File |
+Seed tay hiện chưa có file hồ sơ mẫu. Tester tự upload và đối chiếu:
+
+| Doanh nghiệp | Loại hồ sơ gợi ý | Mã gợi ý | File gợi ý |
 | --- | --- | --- | --- |
-| `TN-CUST-001` | `business_license` | `TN-BL-001` | `business-license-tn-cust-001.pdf` |
-| `TN-CUST-002` | `tax_registration` | `TN-TAX-002` | `tax-registration-tn-cust-002.pdf` |
-| `TN-CUST-003` | `business_license` | `TN-BL-003` | `business-license-tn-cust-003.pdf` |
-| `TN-CUST-004` | `environment_commitment` | `TN-ENV-004` | `environment-commitment-tn-cust-004.pdf` |
-| `TN-CUST-005` | `tax_registration` | `TN-TAX-005` | `tax-registration-tn-cust-005.pdf` |
+| `UAT_KCN-01` | `business_license` | `UAT-DOC-IIT-BL-01` | File ĐKKD IIT do tester upload |
+| `UAT_KCN-01` | `tax_registration` | `UAT-DOC-IIT-TAX-01` | File thuế IIT do tester upload |
 
-Seed download regression: customer `91310000-0000-4000-8000-000000000002` đã có file inline để kiểm tra tải hồ sơ khách hàng.
+Khi kiểm tra download regression, dùng chính file vừa upload để kiểm tra tải lại.
 
-### 3.4 Lô đất, nhà xưởng, hạ tầng
+### 3.4 GIS, lô đất, hạ tầng, tài sản
 
-| Mã | Tên | Trạng thái | Khách hàng hiện tại |
+**Lớp bản đồ và feature:**
+
+| Mã lớp | Tên | Loại | Trạng thái |
 | --- | --- | --- | --- |
-| `TN-LOT-A1` | Lô A1 - Thực phẩm Mekong Xanh | `leased` | `TN-CUST-001` |
-| `TN-LOT-A3` | Lô A3 - Bao bì Hậu Giang | `leased` | `TN-CUST-002` |
-| `TN-LOT-A7` | Lô A7 - Dược liệu Cửu Long | `leased` | `TN-CUST-005` |
-| `TN-LOT-B5` | Lô B5 - Cơ khí Tây Đô | `leased` | `TN-CUST-004` |
-| `TN-LOT-B9` | Lô B9 dự phòng dịch vụ | `available` | Chưa gán |
+| `GIS-UAT-KCN-LOT` | UAT - Ranh khu đất | `polygon` | Đang hoạt động |
 
-| Mã | Loại | Tên | Trạng thái |
+| Mã feature | Tên | Lớp | Liên kết |
 | --- | --- | --- | --- |
-| `TN-FAC-F1` | Nhà xưởng | Nhà xưởng F1 - Logistics Sông Hậu | `active` |
-| `TN-FAC-F2` | Nhà xưởng | Nhà xưởng F2 - Dự phòng Trà Nóc | `active` |
-| `TN-INF-WATER` | Hạ tầng cấp nước | Hạ tầng cấp nước Trà Nóc | `active` |
-| `TN-INF-WW` | Xử lý nước thải | Hạ tầng xử lý nước thải Trà Nóc | `active` |
+| `GIS-UAT-KCN-KD-01` | UAT - Ranh khu đất 01 | `GIS-UAT-KCN-LOT` | `UAT-KCN-KD-01` (`land_lot`) |
 
-### 3.5 Hợp đồng và tài chính
+Geometry chuẩn:
 
-| Mã hợp đồng | Tên | Loại | Giá trị | Hiệu lực |
-| --- | --- | --- | ---: | --- |
-| `TN-CON-LAND-001` | Hợp đồng thuê đất A1 - Mekong Xanh | `land_lease` | 4,320,000,000 | 2026-02-01 đến 2031-01-31 |
-| `TN-CON-LAND-002` | Hợp đồng thuê đất A3 - Bao bì Hậu Giang | `land_lease` | 5,940,000,000 | 2026-03-01 đến 2031-02-28 |
-| `TN-CON-FACT-001` | Hợp đồng thuê nhà xưởng F1 - Logistics Sông Hậu | `factory_lease` | 2,160,000,000 | 2026-04-01 đến 2029-03-31 |
-| `TN-CON-LAND-003` | Hợp đồng thuê đất B5 - Cơ khí Tây Đô | `land_lease` | 7,488,000,000 | 2026-02-01 đến 2032-01-31 |
-| `TN-CON-SVC-001` | Hợp đồng dịch vụ hạ tầng - Dược liệu Cửu Long | `service` | 720,000,000 | 2026-05-01 đến 2028-04-30 |
+```json
+{
+  "type": "Polygon",
+  "coordinates": [[[106.7044, 10.8024],[106.7054, 10.8024],[106.7054, 10.8034],[106.7044, 10.8034],[106.7044, 10.8024]]]
+}
+```
 
-Line item hợp đồng:
+Properties: `{"entity":"land_lot","status":"available","areaM2":10000}`.
 
-| Mã hợp đồng | Đối tượng tính phí | Diễn giải | Số lượng/diện tích | Đơn giá | Thành tiền |
-| --- | --- | --- | ---: | ---: | ---: |
-| `TN-CON-LAND-001` | `TN-LOT-A1` | Thuê đất lô A1 | 18,000 m2 | 4,000 | 72,000,000 |
-| `TN-CON-LAND-002` | `TN-LOT-A3` | Thuê đất lô A3 | 22,000 m2 | 4,500 | 99,000,000 |
-| `TN-CON-FACT-001` | `TN-FAC-F1` | Thuê nhà xưởng xây sẵn F1 | 1 tháng | 60,000,000 | 60,000,000 |
-| `TN-CON-LAND-003` | `TN-LOT-B5` | Thuê đất lô B5 | 26,000 m2 | 4,000 | 104,000,000 |
-| `TN-CON-SVC-001` | `TN-INF-WATER` | Gói dịch vụ hạ tầng cấp nước và nước thải | 1 tháng | 30,000,000 | 30,000,000 |
+**Lô đất:**
 
-Lịch thanh toán hợp đồng:
-
-| Mã hợp đồng | Kỳ tính | Hạn thanh toán | Loại phí | Trước VAT | VAT | Tổng tiền | Trạng thái |
-| --- | --- | --- | --- | ---: | ---: | ---: | --- |
-| `TN-CON-LAND-001` | 2026-09-01 đến 2026-09-30 | 2026-09-10 | `rent` | 72,000,000 | 7,200,000 | 79,200,000 | `due` |
-| `TN-CON-LAND-002` | 2026-09-01 đến 2026-11-30 | 2026-09-15 | `rent` | 297,000,000 | 29,700,000 | 326,700,000 | `due` |
-| `TN-CON-FACT-001` | 2026-09-01 đến 2026-09-30 | 2026-09-10 | `rent` | 60,000,000 | 6,000,000 | 66,000,000 | `planned` |
-| `TN-CON-LAND-003` | 2026-09-01 đến 2026-11-30 | 2026-09-20 | `rent` | 312,000,000 | 31,200,000 | 343,200,000 | `planned` |
-| `TN-CON-SVC-001` | 2026-09-01 đến 2026-09-30 | 2026-09-05 | `service_fee` | 30,000,000 | 3,000,000 | 33,000,000 | `planned` |
-
-Tài liệu hợp đồng tenant-visible:
-
-| Mã hợp đồng | Tên tài liệu | File |
-| --- | --- | --- |
-| `TN-CON-LAND-001` | Hợp đồng thuê đất A1 đã ký | `signed-tn-con-land-001.pdf` |
-| `TN-CON-LAND-002` | Hợp đồng thuê đất A3 đã ký | `signed-tn-con-land-002.pdf` |
-| `TN-CON-FACT-001` | Hợp đồng thuê nhà xưởng F1 đã ký | `signed-tn-con-fact-001.pdf` |
-| `TN-CON-LAND-003` | Hợp đồng thuê đất B5 đã ký | `signed-tn-con-land-003.pdf` |
-| `TN-CON-SVC-001` | Hợp đồng dịch vụ hạ tầng đã ký | `signed-tn-con-svc-001.pdf` |
-
-| Mã phải thu | Khách hàng | Tổng tiền | Đã thu | Còn lại | Hạn | Trạng thái |
-| --- | --- | ---: | ---: | ---: | --- | --- |
-| `REC-TN-MEKONG-2026-09` | `TN-CUST-001` | 79,200,000 | 33,000,000 | 46,200,000 | 2026-09-10 | `partial` |
-| `REC-TN-BAOBI-2026-Q3` | `TN-CUST-002` | 326,700,000 | 0 | 326,700,000 | 2026-09-15 | `open` |
-| `REC-TN-SONGHAU-2026-09` | `TN-CUST-003` | 66,000,000 | 0 | 66,000,000 | 2026-09-10 | `open` |
-| `REC-TN-TAYDO-2026-Q3` | `TN-CUST-004` | 343,200,000 | 171,600,000 | 171,600,000 | 2026-09-20 | `partial` |
-| `REC-TN-CUULONG-2026-09` | `TN-CUST-005` | 33,000,000 | 0 | 33,000,000 | 2026-09-05 | `overdue` |
-
-Thanh toán seed:
-
-| Mã thanh toán | Khách hàng | Số tiền | Trạng thái |
-| --- | --- | ---: | --- |
-| `PAY-TN-MEKONG-2026-09-001` | `TN-CUST-001` | 33,000,000 | `posted` |
-| `PAY-TN-TAYDO-2026-09-001` | `TN-CUST-004` | 171,600,000 | `posted` |
-
-### 3.6 Ticket và thông báo
-
-| Mã ticket | Tiêu đề | Khách hàng | Trạng thái | Ưu tiên |
-| --- | --- | --- | --- | --- |
-| `TCK-TN-MEKONG-WATER-001` | Áp lực nước giảm tại lô A1 | `TN-CUST-001` | `in_progress` | `high` |
-| `TCK-TN-SONGHAU-CONTRACT-001` | Cần xác nhận diện tích thuê nhà xưởng F1 | `TN-CUST-003` | `received` | `medium` |
-| `TCK-TN-CUULONG-WW-001` | Kiểm tra lịch lấy mẫu nước thải | `TN-CUST-005` | `new` | `medium` |
-
-Comment seed cho ticket `TCK-TN-MEKONG-WATER-001`:
-
-| Loại comment | Người ghi | Nội dung | Hiển thị với tenant |
-| --- | --- | --- | --- |
-| Public tenant comment | `uat.tranoc.mekongxanh@ipms.local` | Áp lực nước giảm từ 08:45, đề nghị phản hồi trước ca chiều | Có |
-| Public operations comment | Đội vận hành khu | Đội nước đã tiếp nhận và kiểm tra áp tuyến cấp nước khu A | Có |
-| Internal note | Đội vận hành khu | Đối chiếu bơm tăng áp `TN-INF-WATER` trước khi thông báo khách | Không |
-
-Thông báo seed:
-
-| Người nhận | Tiêu đề |
-| --- | --- |
-| `uat.tranoc.park.admin@ipms.local` | Trà Nóc - Công nợ tháng 09 cần theo dõi |
-| `uat.tranoc.mekongxanh@ipms.local` | Trà Nóc - Phiếu nước đang xử lý |
-
-Outbox/audit seed để kiểm tra nền tảng:
-
-| Nhóm | Mã/sự kiện | Ý nghĩa khi walkthrough |
-| --- | --- | --- |
-| Outbox | `tranoc-manual-test-seed-ready` | Sự kiện park Trà Nóc đã sẵn sàng seed manual test |
-| Outbox | `tranoc-mekong-water-ticket-notification` | Sự kiện yêu cầu gửi thông báo cho ticket nước Mekong Xanh |
-| Activity log | `manual_test_seeded` | Ghi nhận seed Trà Nóc gồm park, cluster, 5 doanh nghiệp, hồ sơ, hợp đồng, công nợ, ticket, notification và auth scope |
-| Auth audit | `uat_tranoc_manual_test_seed_ready` | Ghi nhận user park admin Trà Nóc sẵn sàng cho manual test |
-
-### 3.7 Kỳ tính phí, biểu giá, đồng hồ và chỉ số
-
-Nhóm dữ liệu billing/utility seed hiện dùng khu Bắc An và bộ UAT T09 làm chuẩn vì đã có đủ điện, nước, nước thải, rác, phí dịch vụ, dòng âm scope tenant và kỳ đã khóa để kiểm thử nghiệp vụ.
-
-| Mã kỳ | Tên | Thời gian | Trạng thái | Mục đích test |
-| --- | --- | --- | --- | --- |
-| `BP-BA-2026-08` | Kỳ tính phí KCN Bắc An tháng 08/2026 | 2026-08-01 đến 2026-08-31 | `reviewed` | Đối chiếu chỉ số/giấy báo phí đã soát |
-| `BP-BA-2026-09` | Kỳ tính phí KCN Bắc An tháng 09/2026 | 2026-09-01 đến 2026-09-30 | `draft` | Tạo/sửa dòng tính phí còn mở |
-| `BP-NH-2026-08` | Kỳ tính phí KCN Nam Hải tháng 08/2026 | 2026-08-01 đến 2026-08-31 | `closed` | Kiểm tra chặn sửa kỳ đã đóng |
-| `BP-T09-BA-2026-07-CLOSED` | UAT T09 - Kỳ billing đã khóa Bắc An tháng 07/2026 | 2026-07-01 đến 2026-07-31 | `closed` | Regression kỳ đã khóa |
-| `BP-T09-BA-2026-09` | UAT T09 - Kỳ billing Bắc An tháng 09/2026 | 2026-09-01 đến 2026-09-30 | `reviewed` | Bộ chính để test điện/nước/rác/nước thải |
-| `BP-T09-NH-NEG-2026-09` | UAT T09 - Kỳ billing âm Nam Hải tháng 09/2026 | 2026-09-01 đến 2026-09-30 | `reviewed` | Kiểm tra dữ liệu khác park không lộ sang Bắc An |
-
-| Mã biểu giá | Tên | Loại dịch vụ | Đơn vị | Trạng thái |
-| --- | --- | --- | --- | --- |
-| `TRF-T09-BA-ELEC-TOU-2026` | UAT T09 - Điện Bắc An 3 khung giờ + COS phi | `electricity` | `kWh` | `active` |
-| `TRF-T09-BA-WATER-2026` | UAT T09 - Nước sạch Bắc An theo bậc | `water` | `m3` | `active` |
-| `TRF-T09-BA-WASTEWATER-2026` | UAT T09 - Xử lý nước thải Bắc An theo bậc | `wastewater` | `m3` | `active` |
-| `TRF-T09-BA-WASTE-FIXED-2026` | UAT T09 - Phí thu gom rác cố định Bắc An | `waste` | `tháng` | `active` |
-| `TRF-T09-BA-SHARED-FIXED-2026` | UAT T09 - Phí dịch vụ hạ tầng chung Bắc An | `shared_service` | `tháng` | `active` |
-| `TRF-BA-LAND-2026` | Đơn giá thuê đất Bắc An | `land_rent` | `m2` | `active` |
-
-| Mã đồng hồ | Loại | Điểm đo | Khách hàng | Kỳ có chỉ số | Sản lượng |
-| --- | --- | --- | --- | --- | ---: |
-| `MTR-T09-BA-ANPHU-ELEC` | `electricity` | `sales` | `CUS-T05-BA-001` | `BP-T09-BA-2026-09` | 13,200 kWh |
-| `MTR-T09-BA-ANPHU-WATER` | `water` | `sales` | `CUS-T05-BA-001` | `BP-T09-BA-2026-09` | 620 m3 |
-| `MTR-T09-BA-ANPHU-WASTEWATER` | `wastewater` | `sales` | `CUS-T05-BA-001` | `BP-T09-BA-2026-09` | 590 m3 |
-| `MTR-T09-BA-ELEC-PURCHASE` | `electricity` | `purchase` | Nội bộ khu | `BP-T09-BA-2026-09` | 14,700 kWh |
-| `MTR-T09-BA-ELEC-INTERNAL` | `electricity` | `internal` | Nội bộ khu | `BP-T09-BA-2026-09` | 1,500 kWh |
-| `MTR-T09-NH-NEG-ELEC` | `electricity` | `sales` | `CUS-T05-NH-NEG` | `BP-T09-NH-NEG-2026-09` | 800 kWh |
-
-Chỉ số điện `MTR-T09-BA-ANPHU-ELEC`: tổng 48,000 -> 61,200; bình thường 8,400 kWh, cao điểm 3,200 kWh, thấp điểm 1,600 kWh, COS phi `0.87`. Chỉ số nước/nước thải dùng kiểm tra rule đơn giản: nước 3,380 -> 4,000; nước thải 2,910 -> 3,500.
-
-### 3.8 Dòng tính phí, giấy báo phí và công nợ billing
-
-| Mã dòng tính phí | Loại | Nội dung | Số lượng | Tổng tiền |
-| --- | --- | --- | ---: | ---: |
-| `T09-ELEC-ANPHU` | `electricity` | UAT T09 - Điện sản xuất An Phú tháng 09/2026, gồm COS phi theo P13 | 13,200 | 29,266,272 |
-| `T09-WATER-ANPHU` | `water` | UAT T09 - Nước sạch An Phú tháng 09/2026 | 620 | 7,858,200 |
-| `T09-WASTEWATER-ANPHU` | `wastewater` | UAT T09 - Xử lý nước thải An Phú tháng 09/2026 | 590 | 5,164,950 |
-| `T09-WASTE-ANPHU` | `waste` | UAT T09 - Phí thu gom rác cố định An Phú tháng 09/2026 | 1 | 231,000 |
-| `T09-SHARED-ANPHU` | `shared_service` | UAT T09 - Phí dịch vụ hạ tầng chung An Phú tháng 09/2026 | 1 | 367,500 |
-| `T09-NH-NEG-ELEC` | `electricity` | UAT T09 - Dòng âm Nam Hải để kiểm tra scope tenant Bắc An | 800 | 1,490,400 |
-
-| Mã giấy báo phí | Ngày phát hành | Hạn thanh toán | Tổng tiền | Trạng thái | Trạng thái chứng từ |
+| Mã | Tên | Cụm | Diện tích | Trạng thái | GIS |
 | --- | --- | --- | ---: | --- | --- |
-| `FN-T09-BA-ANPHU-2026-09` | 2026-10-01 | 2026-10-15 | 42,887,922 | `issued` | `generated` |
-| `FN-T09-NH-NEG-2026-09` | 2026-10-01 | 2026-10-15 | 1,490,400 | `issued` | `pending` |
-| `FN-BA-2026-09-SVLOG` | 2026-09-09 | 2026-09-25 | 15,336,000 | `issued` | `generated` |
-| `FN-BA-2026-09-ANTIN` | 2026-09-09 | 2026-09-25 | 3,780,000 | `draft` | `pending` |
+| `UAT-KCN-KD-01` | Khu đất 01 | `UAT-LO-A` | 10000 | Sẵn sàng | `GIS-UAT-KCN-KD-01` |
 
-### 3.9 Nhà cung cấp, chi phí và phải trả
+Số lô `SL-01`. Vị trí: lô đất sẽ giao cho công ty IIT sử dụng.
 
-| Mã nhà cung cấp | Tên | MST | Email | Điện thoại | Trạng thái |
+**Hạ tầng và tài sản:**
+
+| Mã | Tên | Loại | Nhóm | Trạng thái vận hành | Mức quan trọng |
 | --- | --- | --- | --- | --- | --- |
-| `NCC-T09-DIENLUC-BA` | UAT T09 - Công ty Điện lực Bắc An | `3700009001` | `congno.t09@dienluc-bacan.example` | `02743889009` | `active` |
-| `NCC-DIENLUC-BD` | Cong ty Dien luc Binh Duong | `3700123456` | `ketoan@dienlucbd.example` | `02743888001` | `active` |
-| `NCC-CAYXANH-ANPHU` | Công ty Cây xanh An Phú | `0314567890` | `congno@cayxanhanphu.example` | `02743888018` | `active` |
-| `NCC-MINH-PHAT` | Cong ty Co dien Minh Phat | `0312987654` | `congno@minhphat.example` | `02839990118` | `active` |
+| `UAT-KCN-HT-01` | Camera giám sát số 123 | Camera | `security` | Bình thường | Trung bình |
 
-| Mã phải trả | Kỳ | Tổng tiền | Đã trả | Còn lại | Trạng thái |
-| --- | --- | ---: | ---: | ---: | --- |
-| `AP-T09-BA-DIEN-2026-09` | 2026-09 | 33,000,000 | 11,000,000 | 22,000,000 | `partial` |
-| `AP-BA-BT-2026-09` | 2026-09 | 19,800,000 | 0 | 19,800,000 | `open` |
-| `AP-BA-CX-2026-09` | 2026-09 | 13,500,000 | 0 | 13,500,000 | `open` |
-| `AP-BA-DIEN-2026-08` | 2026-08 | 10,000,000 | 4,000,000 | 6,000,000 | `partial` |
+Ngày lắp đặt `15/09/2026`, kiểm tra gần nhất `16/09/2026`, bảo trì tiếp theo `30/09/2026`. Thuộc `UAT-KCN-01` / `UAT-LO-A`.
 
-### 3.10 Tài sản, hạ tầng và bảo trì
+| Mã | Tên | Loại | Tình trạng | Ưu tiên | Nguyên giá / giá trị hiện tại | Liên kết |
+| --- | --- | --- | --- | --- | ---: | --- |
+| `UAT_ASSET1` | Camera giám sát | `camera_system` | Tốt | Bình thường | 1000000 / 1000000 | `UAT-KCN-HT-01` |
 
-| Mã tài sản | Tên | Loại | Tình trạng | Ưu tiên | Giá trị hiện tại |
-| --- | --- | --- | --- | --- | ---: |
-| `AST-T07-BA-PUMP-01` | UAT T07 - Cụm bơm tăng áp Bắc An | `pump_station` | `watch` | `critical` | 408,000,000 |
-| `AST-T07-BA-CCTV-02` | UAT T07 - Camera cổng logistics Bắc An | `security_camera` | `good` | `high` | 56,000,000 |
-| `AST-BA-001` | Trạm bơm nước cấp trung tâm Bắc An | `pump_station` | `watch` | `critical` | 336,000,000 |
-| `AST-BA-002` | Máy biến áp TBA-01 22/0.4kV | `transformer` | `good` | `high` | 1,715,000,000 |
-| `AST-BA-007` | Cụm xử lý nước thải sinh hoạt 01 | `wastewater_unit` | `needs_repair` | `critical` | 855,000,000 |
-| `TN-UTIL-WATER` | Trạm cấp nước Trà Nóc | `water_station` | `good` | `high` | 1,620,000,000 |
-| `TN-UTIL-WW` | Trạm xử lý nước thải Trà Nóc | `wastewater_station` | `good` | `high` | 1,890,000,000 |
+Vị trí `Số 123, đường 123`, serial `123123`, model `123123`, hãng `IMOU`. Ngày lắp `15/09/2026`, bảo trì tiếp theo `30/09/2026`.
 
-| Mã kế hoạch | Tên | Hạn tiếp theo | Ưu tiên | Trạng thái |
+### 3.5 Hợp đồng
+
+**Hợp đồng thuê đất cơ bản:**
+
+| Trường | Giá trị |
+| --- | --- |
+| Mã | `UAT-HD-01` |
+| Tên | Hợp đồng thuê đất |
+| Loại | Thuê đất |
+| Khách | Công ty cổ phần IIT (`UAT_KCN-01`) |
+| KCN/cụm | `UAT-KCN-01` / `UAT-LO-A` |
+| Ngày ký / hiệu lực / hết hạn | `16/09/2026` / `16/09/2026` / `15/10/2026` |
+| Tiền tệ | VND |
+| Lô thuê | `UAT-KCN-KD-01` - Khu đất 01 |
+| Diện tích / đơn vị / đơn giá | 10000 / m2 / 100 |
+| Thành tiền dự kiến | 1000000 |
+| Khoản thu / VAT / chu kỳ / đến hạn | Tiền thuê / 10% / Hàng tháng / Ngày 15 |
+
+**Hợp đồng thuê đất dài hạn:**
+
+| Trường | Giá trị |
+| --- | --- |
+| Mã | `UAT-HD-LAND-2026-001` |
+| Tên | Hợp đồng thuê lô đất UAT-KCN-KD-01 |
+| Khách / KCN / cụm | `UAT_KCN-01` / `UAT-KCN-01` / `UAT-LO-A` |
+| Ngày ký / hiệu lực / hết hạn | `16/09/2026` / `01/10/2026` / `30/09/2027` |
+| Dòng thuê | Thuê lô đất `UAT-KCN-KD-01` để sản xuất thử nghiệm, 10000 m2 x 85000 = 850000000 |
+| Khoản thu / VAT / chu kỳ / cọc / đến hạn | Tiền thuê đất / 10% / Hàng quý / 1700000000 / Ngày 10 |
+
+**Hợp đồng thuê hạ tầng:**
+
+| Trường | Giá trị |
+| --- | --- |
+| Mã | `UAT-HD-ASSET-2026-001` |
+| Tên | Hợp đồng thuê hạ tầng camera giám sát |
+| Loại | Thuê nhà xưởng / tài sản |
+| Dòng thuê | `UAT-KCN-HT-01` - Camera giám sát số 123, SL 1 x 3500000 = 3500000 |
+| Hiệu lực | `01/10/2026` đến `31/03/2027` |
+| Khoản thu / VAT / chu kỳ / cọc / đến hạn | Tiền thuê hạ tầng camera / 10% / Hàng tháng / 7000000 / Ngày 15 |
+
+**Hợp đồng dịch vụ điện/nước/rác:**
+
+| Trường | Giá trị |
+| --- | --- |
+| Mã | `UAT-HD-SVC-2026-001` |
+| Tên | Hợp đồng dịch vụ tiện ích IIT |
+| Hiệu lực | `01/10/2026` (dịch vụ có thể để trống ngày kết thúc hoặc `30/09/2027`) |
+| Điện | Cung cấp điện sản xuất theo `DH-DIEN-UAT-001`, 6180 kWh x 1850, hàng tháng, VAT 10%, đến hạn ngày 15 |
+| Nước | Cấp nước sạch theo `DH-NUOC-UAT-001`, 225 m3 x 12500, VAT 5% |
+| Rác | Thu gom rác công nghiệp, 1250 kg x 1500, VAT 5% |
+| Tổng trước VAT kỳ vọng | Điện 11433000 + nước 2812500 + rác 1875000 = 16120500 |
+
+### 3.6 Kỳ tính phí, biểu giá, đồng hồ và chỉ số
+
+**Kỳ tính phí:**
+
+| Mã | Tên | KCN | Thời gian | Trạng thái |
 | --- | --- | --- | --- | --- |
-| `MP-T07-BA-PUMP-01` | UAT T07 - Bảo trì cụm bơm tăng áp tháng 09 | 2026-09-20 | `critical` | `planned` |
-| `MP-T07-BA-CCTV-02` | UAT T07 - Vệ sinh camera cổng logistics quý IV | 2026-12-12 | `high` | `planned` |
-| `MP-BA-001` | Bảo trì trạm bơm cấp nước hằng tháng | 2026-10-05 | `critical` | `planned` |
-| `MP-BA-006` | Theo dõi cụm xử lý nước thải 01 hằng tuần | 2026-09-12 | `critical` | `planned` |
+| `UAT-KTP-T09` | Kỳ tính phí tháng 09 | `UAT-KCN-01` | 01/09/2026-30/09/2026 | Đã rà soát |
 
-Ticket/sự cố hạ tầng liên quan: `TCK-2026-1001` gắn `AST-BA-002`, `TCK-2026-1002` gắn `AST-BA-004`, `TCK-2026-1005` gắn `AST-BA-007`, `TCK-T08-BA-BREACH`, `TCK-T08-BA-DUE-SOON`, `TCK-T08-BA-MET`.
+**Biểu giá:**
 
-### 3.11 GIS
+| Mã | Tên | Loại | Đơn vị | VAT | Trạng thái |
+| --- | --- | --- | --- | --- | --- |
+| `BG-DIEN-UAT-001` | Biểu giá điện sản xuất UAT 2026 | Điện | kWh | 0.08 | Đang áp dụng |
+| `BG-NUOC-UAT-001` | Biểu giá nước sạch UAT 2026 | Nước | m3 | 0.05 | Đang áp dụng |
+| `BG-NUOC-THAI-UAT-001` | Biểu giá xử lý nước thải UAT 2026 | Nước thải | m3 | 0.05 | Đang áp dụng |
+| `BG-RAC-UAT-001` | Biểu giá thu gom rác thải UAT 2026 | Rác thải | kg | 0.05 | Đang áp dụng |
 
-| Mã layer | Tên | Loại | Trạng thái |
-| --- | --- | --- | --- |
-| `GIS-T07-BA-ASSET-INFRA` | UAT T07 - Tài sản và hạ tầng Bắc An | `mixed` | `active` |
-| `GIS-T07-NH-NEG` | UAT T07 - Lớp kiểm tra Nam Hòa | `mixed` | `active` |
-| `GIS-INF-BA` | Điểm hạ tầng kỹ thuật Bắc An | `point` | `active` |
-| `GIS-LOT-BA` | Ranh giới lô đất Bắc An | `polygon` | `active` |
-| `GIS-ROUTE-BA` | Tuyến giao thông và tiện ích Bắc An | `line` | `active` |
+Biểu giá điện: giờ bình thường 1850, cao điểm 3100, thấp điểm 1200; bật điều chỉnh COSφ, ngưỡng 0.9, phạt 5%. Hiệu lực `01/09/2026-30/09/2027`, thuộc `UAT-KCN-01`. Các biểu giá nước/rác dùng giá phẳng, tắt COSφ (nước sạch 12500, nước thải 8200, rác 1500). Công thức chi tiết xem Phụ lục B.
 
-| Mã feature | Tên | Layer | Liên kết nghiệp vụ |
-| --- | --- | --- | --- |
-| `GIS-T07-INF-WATER-BOOST` | UAT T07 - Điểm bơm tăng áp | `GIS-T07-BA-ASSET-INFRA` | `assets`, `infrastructure_assets` |
-| `GIS-T07-LOT-BA-31` | UAT T07 - Ranh lô BA-31 | `GIS-T07-BA-ASSET-INFRA` | `land_lots` |
-| `GIS-T07-INC-WATER-001` | UAT T07 - Sự cố áp lực nước BA-31 | `GIS-T07-BA-ASSET-INFRA` | `tickets`, `infrastructure_assets` |
-| `GIS-T07-NH-NEG-POINT` | UAT T07 - Điểm ngoại viên Nam Hòa | `GIS-T07-NH-NEG` | `land_lots` |
-| `GIS-INF-POWER-01` | Trạm điện Bắc An | `GIS-INF-BA` | `infrastructure_assets` |
-| `GIS-INF-WATER-01` | Nhà máy nước Bắc An | `GIS-INF-BA` | `infrastructure_assets` |
-| `GIS-WATER-B6-LEAK` | Tuyến nước sau kho lạnh B6 | `GIS-ROUTE-BA` | `infrastructure_assets` |
+**Đồng hồ và chỉ số (bộ ưu tiên có phạt COSφ):**
 
-### 3.12 Báo cáo, import/export và PDF
+| Mã | Loại | Điểm đo | Hệ số | Khách |
+| --- | --- | --- | ---: | --- |
+| `DH-DIEN-UAT-001` | Điện | Bán ra | 1 | `UAT_KCN-01` |
+| `DH-NUOC-UAT-001` | Nước | Bán ra | 1 | `UAT_KCN-01` |
+| `DH-NUOC-THAI-UAT-001` | Nước thải | Bán ra | 1 | `UAT_KCN-01` |
 
-| Mã báo cáo | Tên | Module | Nhóm | Trạng thái |
-| --- | --- | --- | --- | --- |
-| `RPT_CUSTOMER_CONTRACTS` | Báo cáo khách hàng và hợp đồng | `contracts` | `customer_contract` | `active` |
-| `RPT_UTILITY_CONSUMPTION` | Báo cáo sử dụng điện nước | `billing` | `utility` | `active` |
-| `RPT_BILLING_FINANCE` | Báo cáo billing và tài chính | `finance` | `finance` | `active` |
-| `RPT_FINANCE_RECONCILIATION` | Báo cáo đối soát phiếu thu | `finance` | `finance` | `active` |
-| `RPT_SUPPLIER_DEBT` | Báo cáo công nợ nhà cung cấp | `finance` | `finance` | `active` |
-| `RPT_INFRASTRUCTURE_OPERATIONS` | Báo cáo vận hành hạ tầng | `infrastructure` | `operations` | `active` |
-| `RPT_TICKET_SLA` | Báo cáo SLA phiếu yêu cầu | `tickets` | `ticket` | `active` |
+Điện `DH-DIEN-UAT-001` ngày đọc `30/09/2026`: tổng 32000 -> 42150 (=10150 kWh); bình thường 20000 -> 26200 (=6200); cao điểm 7000 -> 9400 (=2400); thấp điểm 5000 -> 6550 (=1550); COSφ `0.86`, kVArh `980`.
 
-Export seed đã hoàn tất để tester kiểm tra lịch sử/tải lại file:
+Kỳ vọng: bình thường 6200x1850=11470000; cao điểm 2400x3100=7440000; thấp điểm 1550x1200=1860000; trước phạt 20770000; phạt COSφ 5% (0.86 < 0.9) =1038500; sau phạt 21808500; VAT 8% =1744680; tổng 23553180.
 
-| Mã báo cáo | Định dạng | Số dòng | File |
-| --- | --- | ---: | --- |
-| `RPT_BILLING_FINANCE` | `xlsx` | 12 | `bao-cao-cong-no-bac-an-t10.xlsx` |
-| `RPT_FINANCE_RECONCILIATION` | `xlsx` | 2 | `bao-cao-doi-soat-phieu-thu-t09.xlsx` |
-| `RPT_INFRASTRUCTURE_OPERATIONS` | `xlsx` | 18 | `bao-cao-van-hanh-ha-tang-bac-an-2026-09.xlsx` |
-| `RPT_SUPPLIER_DEBT` | `xlsx` | 1 | `bao-cao-cong-no-nha-cung-cap-t09.xlsx` |
-| `RPT_TICKET_SLA` | `pdf` | 8 | `bao-cao-sla-ticket-bac-an-t10.pdf` |
+Nước `DH-NUOC-UAT-001`: 820 -> 1045 = 225 m3. Nước thải `DH-NUOC-THAI-UAT-001`: 610 -> 785 = 175 m3.
 
-### 3.13 E-invoice và chữ ký số provider boundary
+Bộ seed cũ không phạt COSφ (dùng khi cần test case đạt): điện 12500 -> 18680 (=6180 kWh), COSφ `0.92`, kVArh `340`.
 
-| Mã eInvoice | Trạng thái | Duyệt | Loại | Số tiền | Số hóa đơn/lỗi |
-| --- | --- | --- | --- | ---: | --- |
-| `EINV-BA-2026-08-001` | `issued` | `approved` | `issue` | 37,048,200 | `00000042` |
-| `EINV-BA-2026-09-001` | `draft` | `pending_approval` | `issue` | 15,336,000 | Chưa phát hành |
-| `EINV-T11-BA-BOUNDARY-DRAFT` | `draft` | `draft` | `issue` | 42,887,922 | Dữ liệu nháp provider boundary |
-| `EINV-T11-BA-BOUNDARY-APPROVED` | `failed` | `approved` | `issue` | 1,288,000 | `provider_mapping_blocked` |
-| `EINV-T11-BA-DUPLICATE-BLOCKED` | `failed` | `rejected` | `issue` | 1,288,000 | `duplicate_issuance_blocked` |
-| `EINV-T11-NH-NEG-SCOPE` | `draft` | `draft` | `issue` | 1,490,400 | Dòng âm khác park |
+**Rác thải:**
 
-| Mã yêu cầu ký | Trạng thái | Loại chứng từ | File | Ghi chú |
-| --- | --- | --- | --- | --- |
-| `SIGN-BA-HD-LEASE-001` | `signed` | `contract_documents` | `hop-dong-hd-ba-lease-001-da-ky.pdf` | Đã ký mẫu |
-| `SIGN-BA-PL-SVC-004-01` | `sent` | `contract_appendices` | `phu-luc-dich-vu-nuoc-sach-ca-dem.pdf` | Đang gửi provider |
-| `SIGN-T12-BA-CONTRACT-READY` | `pending_send` | `contract_documents` | `hop-dong-thue-dat-bac-an-t06-signed.pdf` | Sẵn sàng gửi |
-| `SIGN-T12-BA-APPENDIX-SENT` | `sent` | `contract_appendices` | `phu-luc-dieu-chinh-gia-t06.pdf` | Đã gửi |
-| `SIGN-T12-BA-CONTRACT-FAILED` | `failed` | `contract_documents` | `bien-ban-tham-dinh-phap-ly-t06-internal.pdf` | Chặn do chưa cấu hình provider/certificate |
-| `SIGN-T12-FOREIGN-SCOPE-BLOCKED` | `failed` | `contract_documents` | `hop-dong-thue-dat-bac-an-t06-signed.pdf` | Chặn do khác phạm vi park |
+| Khách | Ngày | Loại | Vào/ra | Phương pháp |
+| --- | --- | --- | ---: | --- |
+| `UAT_KCN-01` | 30/09/2026 | `industrial` | 1250 / 1180 | `sorting` |
+| `UAT_KCN-01` | 29/09/2026 | `domestic` | 620 / 590 | `composting` |
+| `UAT_KCN-01` | 28/09/2026 | `hazardous` | 85 / 80 | `incineration` |
 
-### 3.14 Bản đồ dữ liệu Bắc An mở rộng
+### 3.7 Run tính phí, thông báo phí, phải thu, thanh toán
 
-Bắc An là bộ seed đầy đủ nhất để tester hiểu toàn bộ luồng xử lý dự án từ dữ liệu nền đến vận hành, tài chính, báo cáo và provider boundary. Khi trong các bước UAT có yêu cầu kiểm tra sâu nhưng Trà Nóc chưa có dữ liệu tương ứng, dùng các mã dưới đây để đối chiếu.
+**Run kỳ vọng:**
 
-#### 3.14.1 Khu, cụm và khách hàng Bắc An
+| Trường | Giá trị |
+| --- | --- |
+| Kỳ | `UAT-KTP-T09` |
+| Run code kỳ vọng | `BR-UAT-KTP-T09-001` |
+| Trạng thái run | `completed` |
 
-| Loại | Mã | Tên | Ghi chú |
-| --- | --- | --- | --- |
-| Khu công nghiệp | `IPMS-PARK-01` | Khu công nghiệp Bắc An | Bộ seed chính cho regression/UAT mở rộng |
-| Cụm/khu | `BAC-AN-A` | Cụm sản xuất A | Khách sản xuất, cơ khí, điện tử |
-| Cụm/khu | `BAC-AN-B` | Cụm logistics B | Khách logistics, kho vận, thực phẩm |
+Kết quả tính phí kỳ vọng trong file seed (dùng để đối chiếu, có thể lệch với bộ COSφ phạt nếu hệ thống tính live — khi đó lấy số live làm chuẩn và ghi chú):
 
-| Mã | Tên doanh nghiệp | Trạng thái | Nhóm | Vai trò trong walkthrough |
-| --- | --- | --- | --- | --- |
-| `CUS-BA-001` | Công ty TNHH Thiết bị Bắc An | `active` | `strategic` | Khách thuê chính, hợp đồng `HD-BA-LEASE-001`, fee notice/eInvoice mẫu |
-| `CUS-BA-002` | Công ty Cổ phần Logistics Sao Việt | `active` | `vip` | Hợp đồng logistics, giấy báo phí tháng 09, ticket nước |
-| `CUS-BA-003` | Công ty Cổ phần Cơ khí An Phát | `active` | `strategic` | Khách cơ khí, dữ liệu công nợ/ticket |
-| `CUS-BA-004` | Công ty TNHH Bao bì Minh Khang | `active` | `standard` | Hợp đồng nhà xưởng/phụ lục, ticket hợp đồng |
-| `CUS-BA-005` | Công ty TNHH Linh kiện Điện tử Hòa Bình | `active` | `vip` | Ticket điện áp, nhu cầu điện/nước lớn |
-| `CUS-BA-006` | Công ty Cổ phần Kho vận Bắc An | `active` | `strategic` | Kho vận, cold storage, ticket nước |
-| `CUS-BA-007` | Công ty TNHH Thực phẩm Sạch An Tâm | `suspended` | `watchlist` | Kiểm tra khách tạm ngưng, công nợ và môi trường |
-| `CUS-BA-008` | Công ty Cổ phần Dệt may Phú Thịnh | `active` | `standard` | Khách lớn, kiểm tra lọc/danh sách |
-| `CUS-BA-009` | Công ty TNHH Nội thất Gỗ Việt | `left` | `former` | Kiểm tra khách đã rời khu, không dùng tạo hợp đồng mới |
-| `CUS-BA-011` | Công ty Cổ phần Cơ khí Long Phú | `active` | `standard` | Khách mới, hồ sơ pháp lý và workflow tiền hợp đồng |
-| `CUS-BA-012` | Công ty TNHH Dược phẩm An Tín | `active` | `strategic` | Kho lạnh, nước, eInvoice/SLA |
-| `CUS-T05-BA-001` | Công ty TNHH An Phú Bắc An | `active` | UAT tenant portal | Khách chính cho T05/T08/T09/T10/T11/T12 |
+```text
+Điện: 12,926,000 trước VAT; VAT 1,034,080; tổng 13,960,080
+Nước sạch: 2,812,500 trước VAT; VAT 140,625; tổng 2,953,125
+Nước thải: 1,435,000 trước VAT; VAT 71,750; tổng 1,506,750
+Rác thải: 1,875,000 trước VAT; VAT 93,750; tổng 1,968,750
+Dịch vụ hạ tầng: 350,000 trước VAT; VAT 17,500; tổng 367,500
+Tổng trước VAT: 19,398,500
+Tổng VAT: 1,357,705
+Tổng phải thu: 20,756,205
+```
 
-Hồ sơ/hợp đồng/tệp mẫu đáng kiểm tra:
+**Thông báo phí:**
 
-| Mã/đối tượng | File | Mục đích |
+| Trường | Giá trị |
+| --- | --- |
+| Mã | `TBP-UAT-KTP-T09-IIT` |
+| Khách / kỳ | `UAT_KCN-01` / `UAT-KTP-T09` |
+| Phát hành / đến hạn / trạng thái | `01/10/2026` / `15/10/2026` / `issued` |
+| Trước VAT / VAT / tổng | 19398500 / 1357705 / 20756205 |
+
+**Phải thu và thanh toán:**
+
+| Mã phải thu | Khách | Số phải thu | Đã thu | Còn lại | Đến hạn | Trạng thái |
+| --- | --- | ---: | ---: | ---: | --- | --- |
+| `REC-UAT-KTP-T09-IIT` | `UAT_KCN-01` | 20756205 | 0 | 20756205 | 15/10/2026 | `open` |
+
+| Mã thanh toán | Khách | Ngày | Số tiền | Tham chiếu | Phân bổ |
+| --- | --- | --- | ---: | --- | --- |
+| `PAY-UAT-IIT-2026-10-001` | `UAT_KCN-01` | 05/10/2026 | 10000000 | `VCB-UAT-IIT-1005` | 10000000 vào `REC-UAT-KTP-T09-IIT` |
+
+Kỳ vọng sau phân bổ: `REC-UAT-KTP-T09-IIT` đã thu 10000000, còn 10756205, trạng thái `partial`.
+
+### 3.8 Ticket, SLA, thông báo, NCC, báo cáo, provider boundary
+
+Seed tay hiện chưa có sẵn các nhóm này. Tester tự tạo theo quy tắc `UAT-YYYYMMDD-*`:
+
+| Nhóm | Cách tạo khi test | Mã gợi ý |
 | --- | --- | --- |
-| `CUS-BA-011` | `giay-dkkd-co-khi-long-phu.pdf` | Hồ sơ đăng ký kinh doanh khách mới |
-| `CUS-BA-012` | `giay-du-dieu-kien-kho-duoc.pdf` | Hồ sơ điều kiện kho dược |
-| `HD-BA-LEASE-001` | `hop-dong-hd-ba-lease-001-da-ky.pdf` | Hợp đồng thuê đất tenant-visible |
-| `FN-BA-2026-08-BACAN` | `giay-bao-phi-fn-ba-2026-08-bacan.pdf` | Giấy báo phí PDF đã render |
-| `EINV-BA-2026-08-001` | `hoa-don-dien-tu-fn-ba-2026-08-bacan.pdf`, `.xml` | Hóa đơn điện tử log-only |
+| Ticket | Tạo từ khách `UAT_KCN-01`, gắn hạ tầng `UAT-KCN-HT-01` hoặc lô `UAT-KCN-KD-01` | `TCK-UAT-20260917-01` |
+| SLA | Dùng policy mặc định của hệ thống; ghi thời gian phản hồi/xử lý | Theo hệ thống |
+| Notification | Tạo thủ công hoặc từ ticket/công nợ IIT | Theo hệ thống |
+| Nhà cung cấp / phải trả / chi phí | Tạo NCC `UAT-SUP-20260917-01`, AP và expense tương ứng | `UAT-SUP-*`, `AP-UAT-*` |
+| Báo cáo / export | Chạy báo cáo lọc `UAT-KCN-01`, export và đối chiếu với `REC-UAT-*` | Theo hệ thống |
+| eInvoice | Tạo từ `TBP-UAT-KTP-T09-IIT` hoặc `REC-UAT-KTP-T09-IIT`, không gọi provider live | `EINV-UAT-*` |
+| Chữ ký số | Tạo từ tài liệu hợp đồng `UAT-HD-*`, kiểm tra queue/log | `SIGN-UAT-*` |
 
-#### 3.14.2 Hợp đồng, phụ lục và lịch thanh toán Bắc An
+Nếu UI chưa hỗ trợ tạo, ghi `Blocked` + nêu màn hình/field thiếu.
 
-| Mã hợp đồng | Khách hàng | Loại | Trạng thái | Giá trị | Ghi chú |
-| --- | --- | --- | --- | ---: | --- |
-| `HD-BA-LEASE-001` | `CUS-BA-001` | `land_lease` | `active` | 660,000,000 | Thuê lô `LOT-BA-02`, đã có tài liệu ký |
-| `HD-BA-LOG-002` | `CUS-BA-002` | `land_lease` | `pending_approval` | 720,000,000 | Workflow pháp lý/logistics |
-| `HD-BA-FAC-003` | `CUS-BA-004` | `factory_lease` | `draft` | 310,000,000 | Hợp đồng nhà xưởng nháp |
-| `HD-BA-SVC-004` | `CUS-BA-005` | `service` | `active` | 145,000,000 | Dịch vụ điện nước, có phụ lục ký số |
-| `HD-BA-INF-005` | `CUS-BA-006` | `service` | `pending_approval` | 198,000,000 | Dịch vụ hạ tầng logistics |
-| `HD-BA-FOOD-006` | `CUS-BA-007` | `land_lease` | `terminated` | 540,000,000 | Kiểm tra hợp đồng đã thanh lý |
-| `HD-T06-BA-LAND-101` | `CUS-BA-001` | `land_lease` | UAT T06 | Theo seed T06 | Hợp đồng dùng cho chữ ký số T12 |
-| `HD-T06-BA-SVC-102` | `CUS-BA-002` | `service` | UAT T06 | Theo seed T06 | Case lỗi provider/certificate |
-
-| Mã phụ lục/tài liệu | Liên kết | Mục đích kiểm tra |
-| --- | --- | --- |
-| `PL-BA-SVC-004-01` | `HD-BA-SVC-004` | Phụ lục dịch vụ nước sạch ca đêm, có request ký `SIGN-BA-PL-SVC-004-01` |
-| `PL-T06-BA-LAND-101-01` | `HD-T06-BA-LAND-101` | Phụ lục điều chỉnh giá T06, dùng trong `SIGN-T12-BA-APPENDIX-SENT` |
-| `bien-ban-phap-ly-sao-viet.pdf` | `HD-BA-LOG-002` | Ghi chú rà soát pháp lý nội bộ |
-
-#### 3.14.3 Lô đất, tài sản, hạ tầng và sự cố Bắc An
-
-| Mã | Loại | Tên | Trạng thái | Ghi chú |
-| --- | --- | --- | --- | --- |
-| `LOT-BA-01` | Lô đất | Lô đất Bắc An 01 | `reserved` | Gắn khách `CUS-BA-002`, GIS `GIS-LOT-BA-01` |
-| `LOT-BA-02` | Lô đất | Lô đất Bắc An 02 | `leased` | Gắn khách `CUS-BA-001`, GIS `GIS-LOT-BA-02` |
-| `LOT-T07-BA-31` | Lô đất UAT | UAT T07 - Lô xưởng nhẹ BA-31 | `leased` | Liên kết `HD-BA-LEASE-001`, GIS, hồ sơ pháp lý |
-| `LOT-T07-BA-32` | Lô đất UAT | UAT T07 - Lô mở rộng hạ tầng BA-32 | `maintenance` | Hồ sơ pháp lý sắp hết hạn |
-
-| Mã tài sản/hạ tầng | Tên | Loại | Tình trạng | Ghi chú |
-| --- | --- | --- | --- | --- |
-| `AST-BA-001` | Trạm bơm nước cấp trung tâm Bắc An | `pump_station` | `watch` | Bảo trì `MP-BA-001` |
-| `AST-BA-002` | Máy biến áp TBA-01 22/0.4kV | `transformer` | `good` | Liên kết ticket điện |
-| `AST-BA-003` đến `AST-BA-008` | Tài sản vận hành Bắc An | Nhiều loại | Theo seed | Camera, đường, xử lý nước thải, barrier, sensor |
-| `AST-T07-BA-PUMP-01` | UAT T07 - Cụm bơm tăng áp Bắc An | `pump_station` | `watch` | Bảo trì, tài liệu, GIS, incident |
-| `AST-T07-BA-CCTV-02` | UAT T07 - Camera cổng logistics Bắc An | `security_camera` | `good` | Bảo trì quý IV |
-| `INF-POWER-01` | Trạm điện Bắc An | `power_station` | `normal` | GIS `GIS-INF-POWER-01`, incident điện |
-| `INF-WATER-01` | Nhà máy nước Bắc An | `water_supply` | `normal` | Dùng cho ticket nước/SLA |
-| `INF-ROAD-01` | Đường nội bộ A | `internal_road` | `normal` | GIS tuyến đường |
-| `INF-T07-BA-WATER-BOOST` | UAT T07 - Tuyến bơm tăng áp nước sạch | `water_booster` | `watch` | Liên kết asset, GIS, incident `INC-T07-BA-WATER-001` |
-| `INF-T07-BA-DRAIN-RETENTION` | UAT T07 - Hồ điều tiết nước mưa B2 | `stormwater_retention` | `degraded` | Dùng kiểm tra cảnh báo degraded |
-
-| Mã sự cố | Liên kết | Trạng thái | Mục đích |
-| --- | --- | --- | --- |
-| `SC-HT-2026-001` | `INF-POWER-01` | Theo seed | Sự cố sụt áp có biên bản kiểm tra RMU |
-| `INC-T07-BA-WATER-001` | `AST-T07-BA-PUMP-01`, `INF-T07-BA-WATER-BOOST`, `LOT-T07-BA-31` | `open` | Dao động áp lực nước, tạo/đối chiếu ticket từ hạ tầng |
-| `INC-T07-BA-DRAIN-002` | `INF-T07-BA-DRAIN-RETENTION`, `LOT-T07-BA-32` | `in_progress` | Mực nước hồ điều tiết vượt ngưỡng cảnh báo |
-
-#### 3.14.4 GIS Bắc An
-
-| Mã layer | Loại | Feature chính | Ghi chú |
-| --- | --- | --- | --- |
-| `GIS-LOT-BA` | `polygon` | `GIS-LOT-BA-01`, `GIS-LOT-BA-02` | Ranh giới lô đất Bắc An |
-| `GIS-INF-BA` | `point` | `GIS-INF-POWER-01`, `GIS-INF-WATER-01` | Điểm hạ tầng kỹ thuật |
-| `GIS-ROUTE-BA` | `line` | `GIS-INF-ROAD-01`, `GIS-WATER-B6-LEAK` | Tuyến giao thông/tiện ích |
-| `GIS-T07-BA-ASSET-INFRA` | `mixed` | `GIS-T07-LOT-BA-31`, `GIS-T07-INF-WATER-BOOST`, `GIS-T07-INC-WATER-001` | Liên kết lô đất, asset, hạ tầng, ticket/sự cố |
-
-#### 3.14.5 Ticket, SLA và thông báo Bắc An
-
-| Mã ticket | Khách hàng | Trạng thái | SLA | Nội dung |
-| --- | --- | --- | --- | --- |
-| `TCK-2026-1001` | `CUS-BA-005` | `in_progress` | `on_track` | Điện áp chập chờn tại xưởng điện tử Hòa Bình |
-| `TCK-2026-1002` | `CUS-BA-006` | `received` | `on_track` | Áp lực nước yếu tại trung tâm logistics |
-| `TCK-2026-1003` | `CUS-BA-004` | `new` | `on_track` | Camera cổng logistics B nhiễu hình |
-| `TCK-2026-1004` | `CUS-BA-009` | `completed` | `breached` | Đèn chiếu sáng gần lô A3 tắt liên tục |
-| `TCK-2026-1005` | `CUS-BA-007` | `waiting_confirmation` | `met` | Mùi nước thải tại khu chế biến thực phẩm |
-| `TCK-2026-1006` | `CUS-BA-003` | `in_progress` | `on_track` | Xác nhận diện tích bốc dỡ trước gia hạn thuê |
-| `TCK-2026-1010` | `CUS-BA-001` | `cancelled` | `not_applicable` | Barrier cổng chính A đóng chậm |
-| `TCK-T08-BA-DUE-SOON` | `CUS-T05-BA-001` | `assigned` | `warning` | Ticket nước sắp quá hạn SLA, có ảnh public |
-| `TCK-T08-BA-BREACH` | `CUS-T05-BA-001` | `in_progress` | `breached` | Ticket môi trường quá hạn, có ghi chú/tệp internal |
-| `TCK-T08-BA-MET` | `CUS-T05-BA-001` | `resolved` | `met` | Ticket đã xử lý đúng hạn, có ảnh sau xử lý |
-
-| Mã chính sách/thông báo | Loại | Mục đích |
-| --- | --- | --- |
-| `SLA-T08-BA-WATER-HIGH` | SLA policy | Nước ưu tiên cao, 30 phút phản hồi, 240 phút xử lý |
-| `SLA-T08-BA-ENV-HIGH` | SLA policy | Môi trường ưu tiên cao, 45 phút phản hồi, 360 phút xử lý |
-| `t08_ticket_sla_warning_in_app` | Template | Cảnh báo ticket sắp quá hạn |
-| `t08_ticket_sla_breach_in_app` | Template | Escalation ticket quá hạn |
-| `t08_ticket_resolved_in_app` | Template | Thông báo ticket đã xử lý |
-
-#### 3.14.6 Billing, tài chính, công nợ và nhà cung cấp Bắc An
-
-| Nhóm | Mã | Ghi chú |
-| --- | --- | --- |
-| Kỳ billing | `BP-BA-2026-08`, `BP-BA-2026-09`, `BP-T09-BA-2026-09`, `BP-T09-BA-2026-07-CLOSED` | Kỳ thường, kỳ T09 và kỳ đã khóa |
-| Kỳ tài chính | `FP-BA-2026-08`, `FP-BA-2026-09`, `FP-T09-BA-2026-09`, `FP-T09-BA-2026-07-CLOSED` | Dùng đối soát công nợ và khóa kỳ |
-| Giấy báo phí | `FN-BA-2026-08-BACAN`, `FN-BA-2026-09-SVLOG`, `FN-BA-2026-09-ANTIN`, `FN-T09-BA-ANPHU-2026-09` | Có trạng thái draft/issued/generated |
-| Receivable | `REC-FN-BA-2026-08-BACAN`, `REC-BA-DV-2026-09`, `REC-BA-CU-2026-06`, `REC-FN-BA-2026-09-SVLOG`, `REC-FN-BA-2026-09-ANTIN`, `REC-T09-ANPHU-FN-2026-09`, `REC-T09-ANPHU-OVERDUE-2026-06`, `REC-T09-ANPHU-CLOSED-2026-07` | Công nợ billing, công nợ thủ công, overdue và closed-period negative |
-| Payment | `PAY-BA-2026-09-001`, `PAY-BA-2026-09-002`, `PAY-T09-ANPHU-2026-10-001`, `PAY-T09-ANPHU-UNAPPLIED-2026-10` | Thanh toán posted/draft/unapplied |
-| Nhà cung cấp | `NCC-DIENLUC-BD`, `NCC-MINH-PHAT`, `NCC-CAYXANH-ANPHU`, `NCC-T09-DIENLUC-BA` | Nhà cung cấp điện, bảo trì, cây xanh |
-| Phải trả NCC | `AP-BA-DIEN-2026-08`, `AP-BA-BT-2026-09`, `AP-BA-CX-2026-09`, `AP-T09-BA-DIEN-2026-09` | Supplier payable open/partial |
-| Thanh toán NCC | `SPAY-BA-2026-09-001`, `SPAY-T09-BA-DIEN-2026-10-001` | Thanh toán nhà cung cấp đã posted |
-| Chi phí | `EXP-BA-2026-09-001`, `EXP-BA-2026-09-002` | Chi phí bảo trì/bảo vệ |
-
-| Mã đồng hồ | Loại | Khách hàng | Sản lượng/chỉ số chính |
-| --- | --- | --- | --- |
-| `MTR-BA-SV-ELEC-01` | `electricity` | `CUS-BA-002` | 8,200 -> 13,480 kWh; có tách bình thường/cao điểm/thấp điểm |
-| `MTR-BA-AT-WATER-01` | `water` | `CUS-BA-012` | 120 -> 375 m3 |
-| `MTR-T09-BA-ELEC-PURCHASE` | `electricity` | Nội bộ khu | Điện mua tổng 14,700 kWh |
-| `MTR-T09-BA-ANPHU-ELEC` | `electricity` | `CUS-T05-BA-001` | 48,000 -> 61,200; COS phi `0.87`; sản lượng 13,200 kWh |
-| `MTR-T09-BA-ANPHU-WATER` | `water` | `CUS-T05-BA-001` | 3,380 -> 4,000; sản lượng 620 m3 |
-| `MTR-T09-BA-ANPHU-WASTEWATER` | `wastewater` | `CUS-T05-BA-001` | 2,910 -> 3,500; sản lượng 590 m3 |
-| `MTR-T09-BA-ELEC-INTERNAL` | `electricity` | Nội bộ khu | Điện nội bộ 1,500 kWh |
-
-#### 3.14.7 Import/export, báo cáo, eInvoice, ký số
-
-| Nhóm | Mã/file | Mục đích |
-| --- | --- | --- |
-| Báo cáo danh mục | `RPT_CUSTOMER_CONTRACTS`, `RPT_UTILITY_CONSUMPTION`, `RPT_BILLING_FINANCE`, `RPT_FINANCE_RECONCILIATION`, `RPT_SUPPLIER_DEBT`, `RPT_INFRASTRUCTURE_OPERATIONS`, `RPT_TICKET_SLA`, `RPT_WASTE_OPERATIONS` | Danh mục báo cáo active |
-| Export | `bao-cao-cong-no-bac-an-t10.xlsx`, `bao-cao-doi-soat-phieu-thu-t09.xlsx`, `bao-cao-cong-no-nha-cung-cap-t09.xlsx`, `bao-cao-van-hanh-ha-tang-bac-an-2026-09.xlsx`, `bao-cao-sla-ticket-bac-an-t10.pdf` | File export seed để kiểm tra tải lại/lịch sử |
-| Import | `CUSTOMER_IMPORT_V1`, `ASSET_IMPORT_V1`, large-file boundary 5,000 dòng | Tải mẫu, preview, commit, lỗi giới hạn dòng |
-| eInvoice | `EINV-BA-2026-08-001`, `EINV-BA-2026-09-001`, `EINV-T11-BA-BOUNDARY-DRAFT`, `EINV-T11-BA-BOUNDARY-APPROVED`, `EINV-T11-BA-DUPLICATE-BLOCKED` | Không gọi MISA live; kiểm tra log/provider boundary |
-| Ký số | `SIGN-BA-HD-LEASE-001`, `SIGN-BA-PL-SVC-004-01`, `SIGN-T12-BA-CONTRACT-READY`, `SIGN-T12-BA-APPENDIX-SENT`, `SIGN-T12-BA-CONTRACT-FAILED` | Kiểm tra queue, sent-like state, file signed và lỗi provider/certificate |
-| Dữ liệu âm | `BP-T09-NH-NEG-2026-09`, `MTR-T09-NH-NEG-ELEC`, `FN-T09-NH-NEG-2026-09`, `REC-T09-NH-NEG-2026-09`, `TCK-T08-NH-NEG`, `EINV-T11-NH-NEG-SCOPE`, `SIGN-T12-FOREIGN-SCOPE-BLOCKED` | Kiểm tra park/customer scope không lộ dữ liệu Nam Hải sang Bắc An |
-
-#### 3.14.8 Luồng xử lý end-to-end nên hiểu khi đọc dữ liệu
-
-| Luồng | Dữ liệu gợi ý | Kết quả cần hiểu |
-| --- | --- | --- |
-| Khách hàng -> hồ sơ -> hợp đồng | `CUS-BA-001`, `HD-BA-LEASE-001`, `hop-dong-hd-ba-lease-001-da-ky.pdf` | Khách có hồ sơ, hợp đồng đang hiệu lực và tài liệu tenant-visible |
-| Hợp đồng -> tính phí -> giấy báo phí | `HD-BA-LEASE-001`, `BP-BA-2026-08`, `FN-BA-2026-08-BACAN` | Kỳ billing sinh giấy báo phí, liên kết receivable và PDF |
-| Đồng hồ -> billing item -> receivable | `MTR-T09-BA-ANPHU-ELEC`, `T09-ELEC-ANPHU`, `REC-T09-ANPHU-FN-2026-09` | Chỉ số điện/nước/nước thải tạo dòng phí và công nợ |
-| Receivable -> payment -> allocation | `REC-T09-ANPHU-FN-2026-09`, `PAY-T09-ANPHU-2026-10-001` | Thanh toán phân bổ làm giảm số dư |
-| Supplier -> payable -> payment | `NCC-T09-DIENLUC-BA`, `AP-T09-BA-DIEN-2026-09`, `SPAY-T09-BA-DIEN-2026-10-001` | Đối soát phải trả nhà cung cấp điện |
-| Asset/hạ tầng -> incident -> ticket -> SLA | `INF-T07-BA-WATER-BOOST`, `INC-T07-BA-WATER-001`, `TCK-T08-BA-DUE-SOON` | Sự cố/ticket có SLA, comment, attachment, notification |
-| GIS -> nghiệp vụ | `GIS-T07-INF-WATER-BOOST`, `GIS-T07-LOT-BA-31`, `GIS-T07-INC-WATER-001` | Feature bản đồ mở được liên kết tới asset/lô/ticket |
-| Fee notice -> eInvoice -> file | `FN-BA-2026-08-BACAN`, `EINV-BA-2026-08-001`, `hoa-don-dien-tu-fn-ba-2026-08-bacan.pdf` | Hóa đơn log-only có file PDF/XML tenant-visible |
-| Contract document -> ký số | `HD-T06-BA-LAND-101`, `SIGN-T12-BA-CONTRACT-READY`, `SIGN-T12-BA-APPENDIX-SENT` | Yêu cầu ký vào queue/sent-like state, không gọi provider thật |
-| Báo cáo/export | `RPT_BILLING_FINANCE`, `RPT_SUPPLIER_DEBT`, `bao-cao-cong-no-bac-an-t10.xlsx` | Báo cáo có lịch sử export và file tải lại |
-
-#### 3.14.9 Đối chiếu phạm vi seed Trà Nóc và Bắc An
-
-Tester đọc theo nguyên tắc: Trà Nóc là bộ seed chính để đi walkthrough nghiệp vụ lõi và phân quyền tenant; Bắc An là bộ seed mở rộng, bao phủ thêm các module chuyên sâu. Nếu cần Trà Nóc có đủ 1:1 như Bắc An ở các module chuyên sâu, cần bổ sung seed database tương ứng ngoài phạm vi chỉnh tài liệu này.
-
-| Nhóm dữ liệu | Trà Nóc hiện có trong seed | Bắc An/bộ UAT mở rộng hiện có | Cách dùng khi test |
-| --- | --- | --- | --- |
-| Khu/cụm | `KCN-TRA-NOC`, `TRA-NOC-A`, `TRA-NOC-B` | `IPMS-PARK-01`, `BAC-AN-A`, `BAC-AN-B` | Dùng Trà Nóc để test chọn khu/cụm và park scope |
-| Doanh nghiệp/contact/user tenant | 5 khách `TN-CUST-001` đến `TN-CUST-005`, user park admin, tenant Mekong Xanh, tenant Sông Hậu | Nhiều khách Bắc An `CUS-BA-*`, `CUS-T05-BA-001` | Dùng Trà Nóc cho luồng tenant; dùng Bắc An khi cần nhiều trạng thái khách |
-| Hồ sơ/tệp khách hàng | 5 hồ sơ pháp lý/môi trường/thuế `TN-BL-*`, `TN-TAX-*`, `TN-ENV-*` | Hồ sơ khách hàng, hợp đồng, PDF giấy báo phí, PDF/XML eInvoice | Dùng Trà Nóc để kiểm tra upload/list/download hồ sơ cơ bản |
-| Lô đất/nhà xưởng/hạ tầng | `TN-LOT-*`, `TN-FAC-*`, `TN-INF-WATER`, `TN-INF-WW`, `TN-UTIL-*` | `LOT-BA-*`, `AST-*`, `INF-*`, T07 asset/infra/incident | Dùng Trà Nóc cho liên kết khách - hợp đồng - tài sản; dùng Bắc An cho incident/GIS/bảo trì sâu |
-| Hợp đồng/line item/lịch thanh toán | 5 hợp đồng `TN-CON-*`, 5 line item, 5 lịch thanh toán, 5 file hợp đồng đã ký | Hợp đồng `HD-BA-*`, phụ lục, tài liệu pháp lý, hợp đồng T06/T12 | Dùng Trà Nóc cho luồng từ hợp đồng đến công nợ; dùng Bắc An cho phụ lục/chữ ký số |
-| Phải thu/thanh toán | 5 khoản `REC-TN-*`, 2 thanh toán `PAY-TN-*` | Receivable/payment billing và T09, có overdue/closed/unapplied | Dùng Trà Nóc cho công nợ tenant; dùng Bắc An cho đối soát/kỳ đã khóa |
-| Ticket/comment/notification | 3 ticket `TCK-TN-*`, comment public/internal, 2 notification, outbox/audit | Ticket Bắc An/T08, SLA policy, attachment, escalation template | Dùng Trà Nóc cho ticket tenant thật; dùng Bắc An cho SLA nâng cao |
-| Billing utility | Chưa có kỳ billing/biểu giá/đồng hồ riêng cho Trà Nóc | Kỳ, biểu giá, đồng hồ, meter reading, fee notice Bắc An/T09 | Dùng Bắc An khi test điện/nước/rác/nước thải và giấy báo phí tự động |
-| Nhà cung cấp/chi phí/phải trả | Chưa có supplier payable riêng cho Trà Nóc | Vendor, AP, supplier payment, expense Bắc An/T09 | Dùng Bắc An khi test tài chính chiều mua vào/nhà cung cấp |
-| GIS | Chưa có layer/feature GIS riêng cho Trà Nóc | GIS lot/infra/route/T07 Bắc An | Dùng Bắc An khi test bản đồ và liên kết GIS - nghiệp vụ |
-| Báo cáo/import/export | Chưa có lịch sử export/import riêng cho Trà Nóc | Report catalog, export history, import templates và boundary case | Dùng Bắc An/T10 khi test báo cáo, tải file, import preview/commit |
-| eInvoice/ký số | Chưa có provider boundary riêng cho Trà Nóc | eInvoice T11, digital signature T12, negative scope | Dùng Bắc An để kiểm tra provider boundary, queue, trạng thái lỗi/thành công giả lập |
-
-### 3.15 Ma trận case UAT theo phân hệ
+### 3.9 Ma trận case UAT theo phân hệ
 
 | Phân hệ | Nhóm case | Dữ liệu chính | Bằng chứng tối thiểu |
 | --- | --- | --- | --- |
-| Khởi động phiên UAT | `UAT-00.*` | Tài khoản root, `KCN-TRA-NOC` | Dashboard, bộ lọc khu/cụm, không lỗi nền |
-| Quản trị hệ thống | `UAT-01.*` | Khu/cụm, user, role, park scope | Ảnh danh sách user/role và kết quả chặn sai phạm vi |
-| Khách hàng | `UAT-02.*` | `TN-CUST-*`, hồ sơ `TN-*` | Ảnh danh sách, chi tiết khách hàng, file hồ sơ hoặc export |
-| Hợp đồng | `UAT-03.*` | `TN-CON-*`, line item, lịch thanh toán | Ảnh chi tiết hợp đồng, tài liệu, lịch thanh toán |
-| Hạ tầng/GIS | `UAT-04.*` | `TN-LOT-*`, `TN-FAC-*`, `TN-INF-*`, Bắc An/T07 | Ảnh lô đất/tài sản, liên kết GIS nếu có |
-| Tính phí/tài chính | `UAT-05.*` | `REC-TN-*`, `PAY-TN-*`, Bắc An/T09 | Ảnh công nợ, thanh toán, giấy báo phí hoặc dòng billing |
-| Ticket/SLA/thông báo | `UAT-06.*` | `TCK-TN-*`, notification, Bắc An/T08 | Ảnh ticket, timeline/comment, notification |
-| Provider boundary | `UAT-07.*` | eInvoice T11, chữ ký số T12 | Ảnh trạng thái queue/log, không gọi provider live |
-| Báo cáo/export | `UAT-08.*` | Report catalog, export history, Trà Nóc/Bắc An | File tải xuống và ảnh số liệu nguồn |
-| Phân quyền/audit | `UAT-09.*` | User Trà Nóc, tenant Mekong Xanh/Sông Hậu | Ảnh chặn quyền, audit có actor/action/entity |
+| Khởi động phiên UAT | `UAT-00.*` | Root, `UAT-KCN-01` | Dashboard, bộ lọc KCN/cụm, không lỗi nền |
+| Quản trị hệ thống | `UAT-01.*` | KCN/cụm, user, role, park scope | Ảnh danh sách user/role và kết quả chặn sai phạm vi |
+| Khách hàng | `UAT-02.*` | `UAT_KCN-01`, hồ sơ `UAT-DOC-*` | Ảnh danh sách, chi tiết IIT, file hồ sơ hoặc export |
+| Hợp đồng | `UAT-03.*` | `UAT-HD-01`, `UAT-HD-LAND-2026-001`, `UAT-HD-ASSET-2026-001`, `UAT-HD-SVC-2026-001` | Ảnh chi tiết hợp đồng, tài liệu, điều khoản tài chính |
+| Hạ tầng/GIS | `UAT-04.*` | `UAT-KCN-KD-01`, `GIS-UAT-KCN-KD-01`, `UAT-KCN-HT-01`, `UAT_ASSET1` | Ảnh lô/tài sản, popup GIS |
+| Tính phí/tài chính | `UAT-05.*` | `UAT-KTP-T09`, `BG-*-UAT-001`, `DH-*-UAT-001`, `TBP/REC/PAY-UAT-*` | Ảnh công nợ, thanh toán, giấy báo phí, run billing |
+| Ticket/SLA/thông báo | `UAT-06.*` | `TCK-UAT-*`, notification tự tạo | Ảnh ticket, timeline/comment, notification |
+| Provider boundary | `UAT-07.*` | `EINV-UAT-*`, `SIGN-UAT-*` từ dữ liệu IIT | Ảnh trạng thái queue/log, không gọi provider live |
+| Báo cáo/export | `UAT-08.*` | Report lọc `UAT-KCN-01` | File tải xuống và ảnh số liệu nguồn |
+| Phân quyền/audit | `UAT-09.*` | User `uat.operator.*` / `uat.iit.*` | Ảnh chặn quyền, audit có actor/action/entity |
+
+---
 
 ## 4. Kiểm tra khởi động phiên UAT
 
-Các case trong phần này dùng để xác nhận hệ thống đủ điều kiện thao tác trước khi tester đi sâu vào từng phân hệ. Nếu một case khởi động bị `Blocked`, QA/Test Lead cần xử lý trước khi tiếp tục các nhóm case sau.
+> **Tính năng này là gì:** đây là bước "mở cửa kho" trước khi test. Dashboard là màn hình tổng quan sau đăng nhập, cho biết hệ thống có đang chạy tốt không. Bộ chọn KCN/cụm là công tắc lọc dữ liệu: chọn `Khu công nghiệp UAT` thì mọi màn hình sau đó chỉ hiện dữ liệu của khu đó. Nếu đăng nhập lỗi, trang trắng hoặc báo 401/403/500 thì mọi case phía sau đều vô nghĩa, phải dừng lại báo `Blocked`.
+>
+> **Cách hoạt động:** đăng nhập root (`admin@ipms.local`) để bỏ qua phân quyền hẹp nhất, vào dashboard xem menu đủ 12 phân hệ. Sau đó chọn `UAT-KCN-01` để "khóa" phiên làm việc vào đúng bộ seed IIT. Mở vài menu để chắc dữ liệu có tải (không báo thiếu dữ liệu nền). Ví dụ: mở Khách hàng phải thấy `UAT_KCN-01`, mở Tính phí phải thấy `UAT-KTP-T09`.
+>
+> **Lỗi hay gặp:** sai mật khẩu sau rebuild (`Blocked by credential`), web/API chưa chạy (trang trắng), chọn khu nhưng màn hình vẫn trống (lỗi scope hoặc seed chưa nhập đủ).
 
 ### UAT-00.01 Đăng nhập root admin
 
@@ -673,26 +481,34 @@ Các case trong phần này dùng để xác nhận hệ thống đủ điều k
 
 Kết quả mong đợi: root admin đăng nhập được, không gặp 401/403/500, không có trang trắng.
 
-### UAT-00.02 Chọn dữ liệu Trà Nóc
+### UAT-00.02 Chọn dữ liệu UAT-KCN-01
 
-1. Tại bộ chọn khu/cụm nếu có, chọn `Khu công nghiệp Trà Nóc`.
-2. Tìm nhanh mã `KCN-TRA-NOC` hoặc tên `Trà Nóc`.
+1. Tại bộ chọn KCN/cụm nếu có, chọn `Khu công nghiệp UAT`.
+2. Tìm nhanh mã `UAT-KCN-01` hoặc tên `Khu công nghiệp UAT`.
 3. Mở lần lượt các menu chính để xác nhận dữ liệu tải được.
 
-Kết quả mong đợi: dữ liệu Trà Nóc xuất hiện ở các màn hình liên quan, không còn trạng thái thiếu dữ liệu nền ở tab phạm vi dữ liệu.
+Kết quả mong đợi: dữ liệu UAT-KCN-01 xuất hiện ở các màn hình liên quan, không còn trạng thái thiếu dữ liệu nền ở tab phạm vi dữ liệu.
+
+---
 
 ## 5. Quản trị hệ thống
 
-Phần này xác nhận dữ liệu nền, phạm vi truy cập và cấu hình người dùng. Đây là nền tảng cho toàn bộ luồng khách hàng, hợp đồng, tài chính và phân quyền tenant phía sau.
+> **Tính năng này là gì:** đây là "phần móng" của cả hệ thống. Gồm 3 thứ: (1) Dữ liệu nền KCN/cụm/phòng ban — danh mục dùng chung, mọi khách/hợp đồng/đồng hồ đều phải gắn vào 1 KCN; (2) Phạm vi dữ liệu — bảng cho biết user nào được thấy khu/công ty nào; (3) Người dùng — nơi root tạo tài khoản, gán vai trò (`PARK_ADMIN`, `ENTERPRISE_ADMIN`...) và gán khu/công ty.
+>
+> **Cách hoạt động:** KCN `UAT-KCN-01` chứa 2 cụm `UAT-LO-A/B`. Phòng ban là đơn vị xử lý ticket sau này. Khi tạo user, hệ thống bắt chọn `Park ID` bằng ô chọn (hiện tên `Khu công nghiệp UAT`, không gõ tay mã), nếu là user doanh nghiệp thì chọn thêm `Customer ID` (hiện tên `Công ty cổ phần IIT`) và danh sách công ty tự lọc theo khu đã chọn. Tạo sai phạm vi thì user sẽ không thấy đúng dữ liệu ở các mục sau. Chi tiết quyền xem mục 15.
+>
+> **Ví dụ với bộ IIT:** tìm `UAT-KCN-01` phải ra 1 KCN đang hoạt động; tạo phòng ban `UAT-DEPT-20260917-01` để sau này gán ticket; tạo `uat.operator.kcn01@` phạm vi khu và `uat.iit.user@` phạm vi IIT.
+>
+> **Lỗi hay gặp:** báo `400 BAD_REQUEST` khi lưu (thiếu trường hoặc sai phạm vi), ô khu/công ty bắt gõ UUID tay (lỗi UI), tab phạm vi báo "Chưa chọn khu..." dù đã nhập seed (lỗi scope hoặc seed thiếu).
 
-### UAT-01.01 Kiểm tra dữ liệu nền khu/cụm/phòng ban
+### UAT-01.01 Kiểm tra dữ liệu nền KCN/cụm/phòng ban
 
 1. Vào `Quản trị hệ thống`.
 2. Mở tab dữ liệu nền hoặc danh mục.
-3. Tìm `KCN-TRA-NOC`, `TRA-NOC-A`, `TRA-NOC-B`.
+3. Tìm `UAT-KCN-01`, `UAT-LO-A`, `UAT-LO-B`.
 4. Mở danh mục `Phòng ban`.
 5. Tạo phòng ban mới:
-   - Mã: `UAT-DEPT-20260916-01`
+   - Mã: `UAT-DEPT-20260917-01`
    - Tên: `Phòng UAT vận hành`
    - Trạng thái: đang hoạt động
 6. Lưu và tìm lại bản ghi.
@@ -703,20 +519,20 @@ Kết quả mong đợi: tạo phòng ban không báo `400 BAD_REQUEST`, danh s�
 
 1. Vào tab `Phạm vi dữ liệu`.
 2. Lọc theo `Toàn hệ thống`, `Khu công nghiệp`, `Doanh nghiệp` nếu có.
-3. Tìm `Khu công nghiệp Trà Nóc`.
-4. Tìm `Công ty TNHH Thực phẩm Mekong Xanh`.
+3. Tìm `Khu công nghiệp UAT`.
+4. Tìm `Công ty cổ phần IIT`.
 
-Kết quả mong đợi: tab có dữ liệu seed, không hiện thông báo `Chưa chọn khu công nghiệp hoặc kết nối hệ thống chưa sẵn sàng`.
+Kết quả mong đợi: tab có dữ liệu seed tay, không hiện thông báo `Chưa chọn khu công nghiệp hoặc kết nối hệ thống chưa sẵn sàng`.
 
 ### UAT-01.03 Tạo người dùng nội bộ phạm vi khu
 
 1. Vào tab `Người dùng`.
 2. Bấm `Tạo người dùng`.
 3. Nhập:
-   - Email: `uat.operator.20260916@ipms.local`
-   - Tên: `Nhân viên UAT Trà Nóc`
+   - Email: `uat.operator.kcn01@ipms.local`
+   - Tên: `Nhân viên UAT KCN-01`
    - Vai trò: vai trò vận hành khu hoặc park admin/operator có sẵn
-   - Park ID: chọn bằng select, option hiển thị `Khu công nghiệp Trà Nóc`
+   - Park ID: chọn bằng select, option hiển thị `Khu công nghiệp UAT`
 4. Lưu.
 5. Mở chi tiết user và kiểm tra vai trò/phạm vi.
 
@@ -726,10 +542,10 @@ Kết quả mong đợi: `Park ID` là select hiển thị tên khu, không bắ
 
 1. Vào `Tạo người dùng`.
 2. Chọn vai trò/phạm vi doanh nghiệp nếu UI hỗ trợ.
-3. Chọn `Park ID` = `Khu công nghiệp Trà Nóc`.
+3. Chọn `Park ID` = `Khu công nghiệp UAT`.
 4. Kiểm tra `Customer ID` chuyển thành select.
-5. Chọn option `Công ty TNHH Thực phẩm Mekong Xanh`.
-6. Lưu.
+5. Chọn option `Công ty cổ phần IIT`.
+6. Lưu với email `uat.iit.user@ipms.local`.
 
 Kết quả mong đợi: `Customer ID` là select hiển thị tên doanh nghiệp, danh sách được load theo khu đã chọn.
 
@@ -741,29 +557,37 @@ Kết quả mong đợi: `Customer ID` là select hiển thị tên doanh nghi�
 
 Kết quả mong đợi: form không vỡ layout, lỗi validate rõ bằng tiếng Việt, FE chặn lỗi cơ bản trước khi gọi API, BE vẫn trả lỗi rõ khi payload không hợp lệ.
 
+---
+
 ## 6. Quản lý khách hàng
 
-Phần này kiểm tra vòng đời dữ liệu doanh nghiệp: danh sách khách hàng, thông tin liên hệ, hồ sơ pháp lý và thao tác import/export ở mức danh mục.
+> **Tính năng này là gì:** quản lý "ai đang thuê trong khu". Mỗi khách hàng (doanh nghiệp) có mã, tên, MST, email, điện thoại, khu trực thuộc và trạng thái (`active/suspended/left`). Hồ sơ là các file pháp lý đính kèm (ĐKKD, thuế...). Nút import/export giúp nhập hàng loạt hoặc xuất danh sách ra file.
+>
+> **Cách hoạt động:** danh sách lọc theo KCN. Mở chi tiết `UAT_KCN-01` sẽ thấy 2 tab chính: thông tin chung và hồ sơ. Hồ sơ upload lên thì phải tải lại được (kiểm tra cả tên file và nội dung). Tạo khách mới (`UAT-CUS-20260917-01`) dùng để test luồng tạo mà không làm bẩn seed IIT. Nút `Tải mẫu/Xuất CSV/Nhập XLSX` kiểm tra cả quyền (không có quyền thì không tải được) và giao diện (desktop/mobile không vỡ nút).
+>
+> **Ví dụ với bộ IIT:** `UAT_KCN-01 — Công ty cổ phần IIT`, MST `0319999999`, email `finance.iit@example.test`. Hồ sơ `UAT-DOC-IIT-BL-01` do tester tự upload vì seed tay chưa có file mẫu.
+>
+> **Lỗi hay gặp:** mở chi tiết trang trắng (lỗi FE/BE), MST/email trùng không báo rõ, file upload xong không tải lại được, nút import/export bị tách dòng xấu trên mobile.
 
 ### UAT-02.01 Kiểm tra danh sách seed
 
 1. Vào `Quản lý khách hàng`.
-2. Chọn/lọc khu `Khu công nghiệp Trà Nóc`.
-3. Tìm từng mã `TN-CUST-001` đến `TN-CUST-005`.
-4. Mở chi tiết `TN-CUST-001`.
+2. Chọn/lọc khu `Khu công nghiệp UAT`.
+3. Tìm mã `UAT_KCN-01`.
+4. Mở chi tiết `Công ty cổ phần IIT`.
 
-Kết quả mong đợi: đủ 5 doanh nghiệp seed, mở chi tiết không trang trắng.
+Kết quả mong đợi: thấy khách IIT với MST `0319999999`, email `finance.iit@example.test`, mở chi tiết không trang trắng.
 
 ### UAT-02.02 Tạo doanh nghiệp mới
 
 1. Bấm `Thêm khách hàng`.
 2. Nhập:
-   - Mã khách hàng: `UAT-CUS-20260916-01`
+   - Mã khách hàng: `UAT-CUS-20260917-01`
    - Tên doanh nghiệp: `Công ty TNHH UAT An Phú`
    - MST: `1809999001`
    - Email: `uat.anphu@example.test`
    - Điện thoại: `02923809999`
-   - Khu: `Khu công nghiệp Trà Nóc`
+   - Khu: `Khu công nghiệp UAT`
    - Trạng thái: `active`
 3. Lưu và tìm lại.
 
@@ -771,14 +595,12 @@ Kết quả mong đợi: tạo mới thành công, validate giới hạn độ d
 
 ### UAT-02.03 Hồ sơ khách hàng
 
-1. Mở chi tiết `TN-CUST-001`.
+1. Mở chi tiết `UAT_KCN-01`.
 2. Vào tab `Hồ sơ`.
-3. Kiểm tra hồ sơ `TN-BL-001`.
-4. Tải file `business-license-tn-cust-001.pdf`.
-5. Mở URL report cũ nếu cần kiểm tra hồi quy: `/customers?tab=documents&page=1&customerId=31c8dbe2-ab4d-47f5-bc21-a84611c341d5`.
-6. Thử URL bị encode `&amp;` từ report nếu có.
+3. Upload hồ sơ `UAT-DOC-IIT-BL-01` (giấy ĐKKD).
+4. Tải lại file vừa upload.
 
-Kết quả mong đợi: không trang trắng, hồ sơ tải/xem được hoặc báo lỗi nghiệp vụ rõ. URL có `&amp;` được chuẩn hóa, không làm mất `customerId`.
+Kết quả mong đợi: không trang trắng, hồ sơ tải/xem được hoặc báo lỗi nghiệp vụ rõ.
 
 ### UAT-02.04 Kiểm tra nút import/export khách hàng
 
@@ -788,145 +610,204 @@ Kết quả mong đợi: không trang trắng, hồ sơ tải/xem được hoặ
 
 Kết quả mong đợi: icon và text nằm trên một dòng ở kích thước đủ, không bị tách dòng xấu; file tải được nếu user có quyền.
 
+---
+
 ## 7. Hợp đồng
 
-Phần này kiểm tra luồng từ khách hàng sang hợp đồng, tài liệu đính kèm, line item và lịch thanh toán. Dữ liệu Trà Nóc là bộ chính để đối chiếu hợp đồng đang hiệu lực.
+> **Tính năng này là gì:** hợp đồng là "sợi dây" nối khách hàng với thứ họ thuê: lô đất, hạ tầng/tài sản hoặc dịch vụ điện/nước/rác. Mỗi hợp đồng có loại (`thuê đất / thuê tài sản / dịch vụ`), thời hạn, line item (thuê cái gì, bao nhiêu, đơn giá bao nhiêu) và điều khoản tài chính (khoản thu nào, VAT bao nhiêu %, trả theo tháng/quý, cọc bao nhiêu, đến hạn ngày mấy). Tài liệu đính kèm là file hợp đồng đã ký; phụ lục là bản sửa đổi bổ sung sau này.
+>
+> **Cách hoạt động:** 4 hợp đồng seed IIT bao phủ đủ 3 loại. `UAT-HD-01` là bản thuê đất đơn giản (10000 m2 x 100 = 1000000). `UAT-HD-LAND-2026-001` là bản dài hạn (10000 m2 x 85000 = 850000000, cọc 1700000000, trả theo quý, đến hạn ngày 10). `UAT-HD-ASSET-2026-001` là thuê camera `UAT-KCN-HT-01` (1 x 3500000). `UAT-HD-SVC-2026-001` là gói dịch vụ 3 dòng điện/nước/rác (tổng trước VAT 16120500). Khi tạo hợp đồng mới, hệ thống phải chặn: ngày kết thúc trước ngày bắt đầu, số tiền âm, mã trùng. Lô đã cho thuê (`UAT-KCN-KD-01`) thì không cho gán trùng nếu đã hết chỗ.
+>
+> **Ví dụ đối chiếu:** mở `UAT-HD-LAND-2026-001` phải thấy khách IIT, cụm `UAT-LO-A`, dòng thuê lô `UAT-KCN-KD-01`; mở `UAT-HD-SVC-2026-001` phải thấy 3 dòng điện 6180 kWh / nước 225 m3 / rác 1250 kg gắn đúng đồng hồ `DH-*-UAT-001`.
+>
+> **Lỗi hay gặp:** thiếu line item nhưng vẫn lưu được, ngày sai vẫn lưu, file hợp đồng không tải được, phụ lục không liên kết được với hợp đồng gốc.
 
 ### UAT-03.01 Kiểm tra hợp đồng seed
 
 1. Vào `Quản lý hợp đồng`.
-2. Lọc theo `Khu công nghiệp Trà Nóc`.
-3. Tìm các mã `TN-CON-LAND-001`, `TN-CON-LAND-002`, `TN-CON-FACT-001`, `TN-CON-LAND-003`, `TN-CON-SVC-001`.
-4. Mở chi tiết từng loại hợp đồng: thuê đất, thuê nhà xưởng, dịch vụ.
+2. Lọc theo `Khu công nghiệp UAT`.
+3. Tìm các mã `UAT-HD-01`, `UAT-HD-LAND-2026-001`, `UAT-HD-ASSET-2026-001`, `UAT-HD-SVC-2026-001`.
+4. Mở chi tiết từng loại: thuê đất, thuê hạ tầng, dịch vụ.
 
-Kết quả mong đợi: đủ 5 hợp đồng active, có line items, term versions, lịch thanh toán và tài liệu hợp đồng tenant-visible.
+Kết quả mong đợi: đủ 4 hợp đồng, hiển thị đúng khách IIT, KCN/cụm, ngày hiệu lực, điều khoản tài chính (ngày đến hạn 10/15, VAT, chu kỳ).
 
 ### UAT-03.02 Tạo hợp đồng mới từ UI
 
 1. Bấm `Tạo hợp đồng`.
-2. Chọn khách hàng `Công ty TNHH UAT An Phú` hoặc một doanh nghiệp seed.
+2. Chọn khách hàng `Công ty cổ phần IIT` hoặc `UAT-CUS-20260917-01`.
 3. Chọn loại hợp đồng phù hợp.
-4. Chọn lô đất `TN-LOT-B9` nếu còn available hoặc tài sản phù hợp.
+4. Chọn lô đất còn available (nếu `UAT-KCN-KD-01` đã gắn IIT thì tạo lô mới `UAT-KCN-KD-02` hoặc chọn tài sản phù hợp).
 5. Nhập ngày hiệu lực, giá trị, line item.
 6. Lưu.
 
 Kết quả mong đợi: hợp đồng mới lưu được, ngày kết thúc phải sau ngày bắt đầu, số tiền không âm, mã không trùng.
 
-### UAT-03.03 Phụ lục, tài liệu và lịch thanh toán
+### UAT-03.03 Phụ lục, tài liệu và điều khoản tài chính
 
-1. Mở `TN-CON-LAND-001`.
-2. Kiểm tra lịch thanh toán tháng 09/2026.
-3. Kiểm tra file `signed-tn-con-land-001.pdf`.
-4. Tạo phụ lục UAT nếu UI hỗ trợ.
+1. Mở `UAT-HD-LAND-2026-001`.
+2. Kiểm tra dòng thuê 10000 m2 x 85000 = 850000000, cọc 1700000000, đến hạn ngày 10.
+3. Mở `UAT-HD-SVC-2026-001`, đối chiếu 3 dòng điện/nước/rác và tổng trước VAT 16120500.
+4. Upload/tải tài liệu hợp đồng nếu UI hỗ trợ.
 
-Kết quả mong đợi: dữ liệu hợp đồng liên kết đúng khách hàng/lô đất; file hợp đồng tải được hoặc có trạng thái download rõ.
+Kết quả mong đợi: dữ liệu hợp đồng liên kết đúng IIT/lô đất; file hợp đồng tải được hoặc có trạng thái download rõ.
+
+---
 
 ## 8. Hạ tầng, tài sản và GIS
 
-Phần này kiểm tra liên kết giữa lô đất, nhà xưởng, tài sản vận hành, hạ tầng kỹ thuật và bản đồ. Với các case GIS nâng cao, dùng thêm bộ seed Bắc An/T07.
+> **Tính năng này là gì:** 3 lớp quản lý "đồ đạc" của khu. Lô đất là mảnh đất cho thuê (`UAT-KCN-KD-01`, 10000 m2, số lô `SL-01`, trạng thái sẵn sàng/đã thuê). Hạ tầng là công trình dùng chung (camera `UAT-KCN-HT-01`, nhóm `security`). Tài sản là thiết bị cụ thể gắn vào hạ tầng (camera `UAT_ASSET1`, hãng IMOU, serial `123123`). GIS là bản đồ: layer (`GIS-UAT-KCN-LOT`) là lớp bản đồ, feature (`GIS-UAT-KCN-KD-01`) là hình vẽ trên bản đồ (polygon tọa độ quanh 106.7044/10.8024) liên kết tới lô đất thật.
+>
+> **Cách hoạt động:** lô đất gắn cụm `UAT-LO-A` + feature GIS + khách/hợp đồng thuê. Hạ tầng gắn KCN/cụm, có ngày lắp/bảo trì và trạng thái vận hành (Bình thường). Tài sản gắn hạ tầng liên quan. Trên GIS, zoom/pan/mở popup phải ra đúng thông tin lô (`areaM2:10000`, trạng thái `available`), bấm vào feature phải nhảy được sang hồ sơ lô/tài sản/ticket liên quan. Ô chọn tài sản ở các màn hình khác phải hiện tên (`Camera giám sát`), không hiện mã khô khan hay UUID.
+>
+> **Ví dụ với bộ IIT:** lô `UAT-KCN-KD-01` cho IIT thuê theo `UAT-HD-01`; camera `UAT-KCN-HT-01` cho IIT thuê theo `UAT-HD-ASSET-2026-001`; feature GIS vẽ đúng ranh lô đó.
+>
+> **Lỗi hay gặp:** bản đồ trắng (lỗi tile/layer), popup không mở, feature không liên kết sang nghiệp vụ, trạng thái lô/tài sản sai (đã thuê vẫn hiện trống), dropdown chỉ hiện UUID.
 
-### UAT-04.01 Lô đất và nhà xưởng
+### UAT-04.01 Lô đất
 
 1. Vào `Hạ tầng kỹ thuật`.
-2. Tìm `TN-LOT-A1`, `TN-LOT-A3`, `TN-LOT-A7`, `TN-LOT-B5`, `TN-LOT-B9`.
-3. Kiểm tra trạng thái leased/available.
-4. Tìm `TN-FAC-F1`, `TN-FAC-F2`.
+2. Tìm `UAT-KCN-KD-01`.
+3. Kiểm tra trạng thái, diện tích 10000, số lô `SL-01`, cụm `UAT-LO-A`.
+4. Kiểm tra liên kết khách IIT / hợp đồng `UAT-HD-01` / `UAT-HD-LAND-2026-001`.
 
-Kết quả mong đợi: lô đất/nhà xưởng hiển thị đúng trạng thái và liên kết khách hàng/hợp đồng nếu có.
+Kết quả mong đợi: lô đất hiển thị đúng trạng thái và liên kết khách hàng/hợp đồng.
 
-### UAT-04.02 Hạ tầng kỹ thuật
+### UAT-04.02 Hạ tầng và tài sản
 
-1. Tìm `TN-INF-WATER`.
-2. Tìm `TN-INF-WW`.
-3. Mở chi tiết, kiểm tra trạng thái vận hành và thông tin công suất.
-4. Tìm thêm `AST-T07-BA-PUMP-01`, `AST-T07-BA-CCTV-02`, `AST-BA-001`, `AST-BA-007` để kiểm tra luồng tài sản nền, bảo trì và sự cố.
-5. Kiểm tra filter/field chọn tài sản hiển thị tên tài sản, không chỉ hiển thị mã/UUID.
+1. Tìm `UAT-KCN-HT-01` (Camera giám sát số 123).
+2. Mở chi tiết, kiểm tra trạng thái vận hành Bình thường, nhóm `security`, ngày bảo trì `30/09/2026`.
+3. Tìm `UAT_ASSET1`, kiểm tra loại `camera_system`, tình trạng Tốt, hãng IMOU, liên kết `UAT-KCN-HT-01`.
+4. Kiểm tra filter/field chọn tài sản hiển thị tên tài sản, không chỉ hiển thị mã/UUID.
 
-Kết quả mong đợi: tài sản hạ tầng hoạt động, có thể liên kết ticket/sự cố.
+Kết quả mong đợi: hạ tầng/tài sản hoạt động, có thể liên kết ticket/sự cố.
 
 ### UAT-04.03 GIS
 
 1. Vào `GIS`.
-2. Lọc/tìm layer `GIS-T07-BA-ASSET-INFRA`.
-3. Tìm các feature `GIS-T07-INF-WATER-BOOST`, `GIS-T07-LOT-BA-31`, `GIS-T07-INC-WATER-001`.
-4. Thử zoom, pan, mở popup/chi tiết nếu có.
-5. Đổi sang layer âm `GIS-T07-NH-NEG` và xác nhận dữ liệu khác park không lẫn vào phạm vi Bắc An/tenant đang test.
+2. Lọc/tìm layer `GIS-UAT-KCN-LOT`.
+3. Tìm feature `GIS-UAT-KCN-KD-01`.
+4. Thử zoom, pan, mở popup/chi tiết; đối chiếu geometry Polygon quanh `[106.7044, 10.8024]` và properties `areaM2:10000`.
+5. Kiểm tra liên kết feature tới lô `UAT-KCN-KD-01`.
 
-Kết quả mong đợi: bản đồ tải được, không trắng, feature mở được popup/chi tiết, liên kết đúng bảng nghiệp vụ `assets`, `land_lots`, `tickets` hoặc `infrastructure_assets`.
+Kết quả mong đợi: bản đồ tải được, không trắng, feature mở được popup/chi tiết, liên kết đúng lô đất.
 
-## 9. Tính phí và tài chính
+---
 
-Phần này kiểm tra đường đi từ lịch thanh toán hoặc chỉ số sử dụng đến phải thu, thanh toán, giấy báo phí và đối soát tài chính. Trà Nóc dùng cho công nợ cơ bản; Bắc An/T09 dùng cho billing utility và nhà cung cấp.
+## 9. Tính phí và tài chính — luồng Tài chính công nợ cho người không chuyên
 
-### UAT-05.01 Kiểm tra lịch thanh toán/phải thu seed
+> **Nói một câu:** Tính phí là khâu "tính xem IIT nợ bao nhiêu", Tài chính công nợ là khâu "theo dõi IIT đã trả bao nhiêu, còn nợ bao nhiêu". Tiền chỉ hết nợ khi phiếu thu được gắn (phân bổ) đúng vào khoản nợ.
+>
+> **Sơ đồ đi của tiền (nhớ 6 bước này là hiểu hết mục 9):** đồng hồ/chỉ số → run tính phí `BR-UAT-KTP-T09-001` → thông báo phí `TBP-UAT-KTP-T09-IIT` → phải thu `REC-UAT-KTP-T09-IIT` → thanh toán `PAY-UAT-IIT-2026-10-001` → phân bổ (gắn tiền vào nợ). Chiều ngược lại là tiền khu phải trả cho người khác: nhà cung cấp → phải trả NCC → thanh toán NCC → phân bổ NCC.
+>
+> **Từ mới cần biết (gặp đúng chữ này trên nút/tab màn hình):**
+>
+> | Từ trên màn hình | Hiểu đơn giản | Ví dụ IIT |
+> | --- | --- | --- |
+> | Thông báo phí | Tờ giấy báo "tháng này IIT phải trả từng này" | `TBP-UAT-KTP-T09-IIT`, tổng 20756205, đến hạn 15/10/2026 |
+> | Phải thu | Khoản nợ cần đòi, sinh ra từ thông báo phí | `REC-UAT-KTP-T09-IIT`, ban đầu `Đang mở`, nợ 20756205 |
+> | Thanh toán / phiếu thu | Tờ tiền IIT đã chuyển, trạng thái `posted` là đã ghi nhận | `PAY-UAT-IIT-2026-10-001`, 10 triệu ngày 05/10, ref `VCB-UAT-IIT-1005` |
+> | Phân bổ (tab `Phân bổ`) | Thao tác "gắn" tờ tiền vào đúng khoản nợ | Gắn 10 triệu vào `REC-UAT-KTP-T09-IIT` |
+> | Đã phân bổ / Chưa phân bổ | Tiền đã gắn vào nợ / tiền còn treo chưa biết trừ vào đâu | Sau khi gắn: đã phân bổ 10000000, chưa phân bổ 0 ở phiếu này; nợ còn 10756205 |
+> | Trạng thái nợ | `Bản nháp (draft)` → `Đang mở (open)` → `Thu một phần (partial)` → `Đã thanh toán (paid)`; quá hạn thì thành `Quá hạn (overdue)`, hủy thì `Đã hủy (cancelled)` | `REC-UAT-KTP-T09-IIT` đi từ `open` → `partial` sau khi gắn 10 triệu |
+> | Gợi ý phân bổ | Nút hệ thống tự đề xuất "nên trừ vào khoản nào" | Bấm để xem gợi ý rồi mới bấm Lưu phân bổ |
+> | Điều chỉnh (tab `Điều chỉnh`) | Giấy sửa nợ (tăng/giảm) khi tính nhầm, ở trạng thái yêu cầu và cần duyệt mới áp dụng | Ví dụ xin giảm 500000 vì đối soát khối lượng, phải có lý do |
+> | Kỳ tài chính (tab `Kỳ tài chính`) | Cái khóa theo tháng: khóa rồi thì không cho phát sinh/sửa trong tháng đó | Khóa tháng 09 thì không tạo nợ/thu lùi ngày vào tháng 09 nữa |
+> | Phải trả NCC / Thanh toán NCC / Chi phí | Chiều khu trả tiền: khu nợ NCC → khu chuyển tiền → gắn tiền vào nợ NCC | Tự tạo `UAT-SUP-20260917-01` vì seed tay chưa có NCC |
+> | Đối soát (báo cáo `RPT_FINANCE_RECONCILIATION`) | Bảng kiểm tra phiếu thu và phân bổ có khớp nhau không, ai chưa khớp, ai thu một phần, ai phân bổ vượt | Dùng khi PM hỏi "tiền đã khớp hết chưa" |
+>
+> **Cách đọc 3 con số quan trọng (đừng nhầm):** `Số phải thu` là tổng nợ ban đầu; `Đã thu (đã phân bổ)` là tiền đã gắn vào nợ; `Còn lại = Số phải thu − Đã thu`. Với IIT: 20756205 − 10000000 = 10756205. Còn `Chưa phân bổ` nằm ở phía phiếu thu: `Chưa phân bổ = Số tiền phiếu − Tổng đã gắn`. Ví dụ phiếu 12 triệu mà mới gắn 10 triệu thì còn treo 2 triệu.
+>
+> **Lỗi hay gặp:** nhầm "tạo thanh toán" với "đã hết nợ" (tạo mà chưa phân bổ thì nợ vẫn còn), gắn vượt số nợ (hệ thống phải chặn), gắn nhầm sang khách khác, sửa kỳ đã khóa, tạo điều chỉnh nhưng không được duyệt mà tưởng đã trừ nợ.
+
+### UAT-05.01 Mở khoản nợ IIT và đọc đúng 3 con số (phải thu)
+
+> **Luồng:** vào `Tài chính & công nợ` → lọc khu `Khu công nghiệp UAT` → tìm `REC-UAT-KTP-T09-IIT` → mở chi tiết. Đây là khoản nợ sinh từ thông báo phí `TBP-UAT-KTP-T09-IIT` (phát hành 01/10, đến hạn 15/10/2026).
+>
+> **Đọc màn hình thế nào:** nhìn 3 ô `Số phải thu / Đã thu / Còn lại` và ô `Trạng thái`. Chưa test UAT-05.02 thì phải thấy 20756205 / 0 / 20756205 và `Đang mở (open)`. Đã test UAT-05.02 rồi thì phải thấy 20756205 / 10000000 / 10756205 và `Thu một phần (partial)`. Nếu quá ngày 15/10 mà chưa trả hết thì trạng thái chuyển `Quá hạn (overdue)`. Mở tab `Phân bổ` thì thấy đang gắn bao nhiêu tiền vào khoản này; mở tab `Điều chỉnh` thì thấy có giấy sửa nợ nào đang chờ duyệt không.
 
 1. Vào `Tài chính & công nợ`.
-2. Lọc theo khu `Khu công nghiệp Trà Nóc`.
-3. Tìm các mã `REC-TN-*`.
-4. Mở `REC-TN-MEKONG-2026-09`.
+2. Lọc theo khu `Khu công nghiệp UAT`.
+3. Tìm `REC-UAT-KTP-T09-IIT`.
+4. Mở chi tiết, đọc 3 số + trạng thái + ngày đến hạn, chụp ảnh.
+5. Mở tab `Phân bổ` và tab `Điều chỉnh` để chắc không có gì lạ.
 
-Kết quả mong đợi: tổng tiền 79,200,000; đã thu 33,000,000; còn lại 46,200,000; trạng thái `partial`.
+Kết quả mong đợi: tổng 20756205; đã thu 0 (hoặc 10000000 nếu đã test UAT-05.02); còn lại tương ứng; trạng thái `open`/`partial`; đến hạn `15/10/2026`. Nếu cần tạo nợ tay để test thêm thì dùng nút `Tạo phải thu thủ công` → điền `Mã phải thu / Khách hàng / Số tiền / Mô tả` → `Lưu phải thu`, nhưng đừng sửa `REC-UAT-*` gốc.
 
-### UAT-05.02 Ghi nhận thanh toán UAT
+### UAT-05.02 Thu tiền IIT: tạo phiếu thu rồi gắn vào nợ (thanh toán + phân bổ)
 
-1. Tạo thanh toán mới cho một khoản đang `open`, ví dụ `REC-TN-SONGHAU-2026-09`.
-2. Nhập số tiền nhỏ hơn hoặc bằng số còn lại.
-3. Lưu/ghi nhận.
-4. Kiểm tra phân bổ và số dư.
+> **Luồng:** đây là bước nhiều người nhầm nhất nên làm đúng thứ tự 2 việc: (1) tạo phiếu thu `PAY-UAT-IIT-2026-10-001` — nghĩa là "ghi nhận IIT đã chuyển 10 triệu ngày 05/10 bằng chuyển khoản, ref `VCB-UAT-IIT-1005`", trạng thái `posted`; (2) phân bổ — nghĩa là "gắn 10 triệu đó vào đúng khoản `REC-UAT-KTP-T09-IIT`". Chỉ sau bước 2 thì nợ mới giảm từ 20756205 xuống 10756205 và chuyển `open` → `partial`. Nếu mới tạo phiếu mà chưa phân bổ thì tiền nằm ở ô `Chưa phân bổ`, nợ vẫn nguyên — đây không phải lỗi.
+>
+> **Thao tác gợi ý trên UI:** tạo/lưu phiếu thu → vào chi tiết phiếu → tab `Phân bổ` → bấm gợi ý phân bổ để hệ thống đề xuất khoản `REC-UAT-KTP-T09-IIT` → nhập 10000000 → Lưu. Thử nhập vượt (ví dụ 99999999) thì hệ thống phải chặn, đó là `Pass` cho kiểm tra chặn phân bổ vượt.
 
-Kết quả mong đợi: số dư giảm đúng, không cho phân bổ vượt số phải thu.
+1. Tạo thanh toán `PAY-UAT-IIT-2026-10-001` cho `REC-UAT-KTP-T09-IIT` (05/10/2026, 10000000, chuyển khoản, ref `VCB-UAT-IIT-1005`), lưu tới khi `posted`.
+2. Vào tab `Phân bổ`, phân bổ 10000000 vào `REC-UAT-KTP-T09-IIT` (dùng gợi ý nếu có).
+3. Quay lại phải thu, kiểm tra 20756205 / 10000000 / 10756205 + `partial`; quay lại phiếu thu, kiểm tra `Chưa phân bổ` = 0.
+4. Thử phân bổ vượt để chắc hệ thống chặn.
 
-### UAT-05.03 Billing/fee notice
+Kết quả mong đợi: còn lại 10756205, trạng thái `partial`; không cho phân bổ vượt số phải thu. Bằng chứng: ảnh phải thu trước/sau + ảnh phiếu thu + tab phân bổ.
+
+### UAT-05.03 Billing run / fee notice
 
 1. Vào `Tính phí`.
-2. Mở kỳ `BP-T09-BA-2026-09`.
-3. Đối chiếu các dòng phí `T09-ELEC-ANPHU`, `T09-WATER-ANPHU`, `T09-WASTEWATER-ANPHU`, `T09-WASTE-ANPHU`, `T09-SHARED-ANPHU`.
-4. Mở giấy báo phí `FN-T09-BA-ANPHU-2026-09` và kiểm tra tổng tiền 42,887,922.
-5. Nếu tạo kỳ mới, dùng mã `UAT-BP-202609-01`.
-6. Thử xuất/tải giấy báo phí nếu UI hỗ trợ.
+2. Mở kỳ `UAT-KTP-T09` (01/09-30/09/2026, Đã rà soát).
+3. Kiểm tra run `BR-UAT-KTP-T09-001` trạng thái `completed`.
+4. Mở thông báo phí `TBP-UAT-KTP-T09-IIT`, kiểm tra trước VAT 19398500, VAT 1357705, tổng 20756205, phát hành `01/10/2026`, đến hạn `15/10/2026`.
+5. Nếu tạo kỳ mới, dùng mã `UAT-KTP-202609-01`.
 
-Kết quả mong đợi: dữ liệu hợp đồng/phải thu đủ để đối chiếu; PDF/template chính thức có thể `Blocked by official template` nếu chưa được khách hàng chốt.
+Kết quả mong đợi: dữ liệu hợp đồng/đồng hồ đủ để đối chiếu; PDF/template chính thức có thể `Blocked by official template` nếu chưa được khách hàng chốt.
 
 ### UAT-05.04 Điện, nước, nước thải, rác và phí dịch vụ
 
 1. Trong module `Tính phí`, mở tab đồng hồ/chỉ số nếu có.
-2. Tìm `MTR-T09-BA-ANPHU-ELEC`, kiểm tra chỉ số tổng 48,000 -> 61,200 và sản lượng 13,200 kWh.
-3. Kiểm tra tách khung giờ: bình thường 8,400 kWh, cao điểm 3,200 kWh, thấp điểm 1,600 kWh, COS phi `0.87`.
-4. Tìm `MTR-T09-BA-ANPHU-WATER`, kiểm tra sản lượng 620 m3.
-5. Tìm `MTR-T09-BA-ANPHU-WASTEWATER`, kiểm tra sản lượng 590 m3.
-6. Đối chiếu biểu giá `TRF-T09-BA-ELEC-TOU-2026`, `TRF-T09-BA-WATER-2026`, `TRF-T09-BA-WASTEWATER-2026`, `TRF-T09-BA-WASTE-FIXED-2026`, `TRF-T09-BA-SHARED-FIXED-2026`.
-7. Kiểm tra dòng âm `T09-NH-NEG-ELEC` không xuất hiện khi user đang ở phạm vi Bắc An.
+2. Tìm `DH-DIEN-UAT-001`, kiểm tra chỉ số tổng 32000 -> 42150 (10150 kWh); tách giờ 6200/2400/1550; COSφ `0.86`; tính phạt 5% theo mục 3.6.
+3. Tìm `DH-NUOC-UAT-001` (820 -> 1045 = 225 m3) và `DH-NUOC-THAI-UAT-001` (610 -> 785 = 175 m3).
+4. Đối chiếu biểu giá `BG-DIEN-UAT-001`, `BG-NUOC-UAT-001`, `BG-NUOC-THAI-UAT-001`, `BG-RAC-UAT-001`.
+5. Kiểm tra bản ghi rác `industrial` 1250/1180 ngày `30/09/2026` (kèm `domestic`/`hazardous` nếu đã nhập).
+6. Đối chiếu dòng dịch vụ hạ tầng 350000 từ `UAT-HD-ASSET-2026-001`.
 
-Kết quả mong đợi: điện/nước/nước thải/rác/phí dịch vụ tính đúng theo dữ liệu seed; field phụ thuộc như kỳ, đồng hồ, khách hàng, biểu giá dùng select-option có tên dễ hiểu.
+Kết quả mong đợi: điện/nước/nước thải/rác tính đúng theo file seed; field phụ thuộc như kỳ, đồng hồ, khách hàng, biểu giá dùng select-option có tên dễ hiểu.
 
-### UAT-05.05 Chi phí nhà cung cấp và phải trả
+### UAT-05.05 Chiều khu trả tiền: NCC → phải trả → thanh toán NCC → phân bổ (cho người không chuyên)
+
+> **Luồng:** đây là chiều ngược với thu tiền IIT. Hiểu bằng ví dụ: khu thuê Điện lực sửa trạm bơm → Điện lực thành `Nhà cung cấp (NCC)` → khu ghi giấy `Phải trả NCC` ("khu nợ NCC từng này", trạng thái `open/partial/paid/overdue` tương tự phải thu) → khu chuyển tiền bằng `Thanh toán NCC` (`posted`, có `UNC` tham chiếu) → vào tab `Phân bổ thanh toán NCC` để gắn tiền vào đúng giấy nợ. `Chi phí` là khoản ghi nhận đã tiêu (bảo trì, bảo vệ...), có thể gắn NCC hoặc không. Seed tay chưa có NCC nên phải tự tạo `UAT-SUP-20260917-01` trước, rồi mới tạo được phải trả.
+>
+> **Đảo ngược/điều chỉnh cần biết:** thanh toán NCC có thêm nút đảo ngược (`reversed`, phải nhập lý do) khi chuyển nhầm; khi đó tiền đã gắn về 0. Tab `Kỳ tài chính` khóa theo tháng: đã khóa thì không tạo nợ/thu NCC lùi ngày vào tháng đó. Doanh nghiệp IIT (tenant) không được thấy màn hình này — nếu IIT mở được thì đó là lỗi phân quyền.
 
 1. Vào `Tài chính` -> tab nhà cung cấp/phải trả/chi phí nếu có.
-2. Tìm nhà cung cấp `NCC-T09-DIENLUC-BA`.
-3. Mở phải trả `AP-T09-BA-DIEN-2026-09`.
-4. Kiểm tra tổng tiền 33,000,000; đã trả 11,000,000; còn lại 22,000,000; trạng thái `partial`.
-5. Tạo chi phí UAT mới, field `Nhà cung cấp` chọn từ danh sách, ưu tiên chọn `UAT T09 - Công ty Điện lực Bắc An`.
+2. Tạo NCC `UAT-SUP-20260917-01` (điền tên/MST/email kế toán/điện thoại, thuộc `UAT-KCN-01`).
+3. Tạo phải trả NCC: điền `Mã phải trả NCC / Nhà cung cấp (chọn từ danh sách, không gõ tay) / Kỳ (VD 2026-09) / Tiền trước thuế / Thuế NCC / Diễn giải`, lưu tới `open`.
+4. Tạo thanh toán NCC (`posted`), vào `Phân bổ thanh toán NCC` để gắn tiền vào phải trả vừa tạo; kiểm tra `Đã phân bổ / Chưa phân bổ` như luồng IIT.
+5. Tạo 1 chi phí gắn NCC trên và KCN `UAT-KCN-01`, lưu và mở lại.
+6. Đăng nhập thử `uat.iit.admin@` để chắc tenant không mở được màn hình NCC.
 
-Kết quả mong đợi: không phải nhập nhà cung cấp tự do; sửa thông tin nhà cung cấp và lưu chi phí không lỗi validate mơ hồ.
+Kết quả mong đợi: NCC chọn từ danh sách, không nhập tay tự do; phải trả đi `open` → `partial` → `paid` đúng khi phân bổ; đảo ngược phải có lý do; kỳ đã khóa thì chặn phát sinh; tenant IIT bị chặn. Lưu chi phí không lỗi validate mơ hồ. Nếu UI chưa hỗ trợ, ghi `Blocked` + nêu tab thiếu.
+
+---
 
 ## 10. Phiếu yêu cầu, SLA và thông báo
 
-Phần này kiểm tra luồng vận hành sau khi khách hàng gửi phản ánh: tiếp nhận ticket, cập nhật trạng thái, ghi comment, theo dõi SLA và phát sinh thông báo.
+> **Tính năng này là gì:** ticket là "phiếu kêu cứu" của doanh nghiệp (hỏng camera, mất nước...). Mỗi ticket có khách gửi, hạ tầng/lô liên quan, loại sự cố, ưu tiên, phòng ban xử lý, trạng thái (mới → đã nhận → đang xử lý → chờ xác nhận → hoàn thành/hủy) và timeline bình luận. SLA là "đồng hồ deadline": hệ thống đo thời gian phản hồi/xử lý, gắn nhãn đúng hạn (`met`), sắp trễ (`warning`), trễ (`breached`). Thông báo là tin gửi tới inbox/log của ban quản lý hoặc doanh nghiệp khi có ticket/công nợ mới.
+>
+> **Cách hoạt động:** seed tay chưa có ticket sẵn nên tester tự tạo `TCK-UAT-20260917-01` cho IIT, gắn `UAT-KCN-HT-01` hoặc `UAT-KCN-KD-01`. Tạo xong thì chuyển trạng thái thử, mỗi lần chuyển phải ghi timeline + cập nhật SLA + sinh thông báo (nếu đã cấu hình SMTP thì gửi mail, chưa thì ghi log `skipped`). Bình luận có loại public (doanh nghiệp thấy) và internal (chỉ nội bộ khu thấy).
+>
+> **Ví dụ với bộ IIT:** ticket "Camera số 123 mờ hình tại Lô A" của IIT, ưu tiên trung bình, gán phòng vận hành; SLA tính từ lúc tạo; thông báo hiện trong inbox của `uat.operator.kcn01@`.
+>
+> **Lỗi hay gặp:** tạo ticket không gắn được hạ tầng, chuyển trạng thái không cập nhật SLA, timeline mất bình luận, thông báo lộ secret/token, provider email thật chưa cấu hình thì phải ghi `Blocked` chứ không báo `Fail`.
 
-### UAT-06.01 Kiểm tra ticket seed
+### UAT-06.01 Kiểm tra ticket (tự tạo từ seed IIT)
 
 1. Vào `Phiếu yêu cầu & phản ánh`.
-2. Lọc theo `Khu công nghiệp Trà Nóc`.
-3. Tìm `TCK-TN-MEKONG-WATER-001`.
+2. Lọc theo `Khu công nghiệp UAT`.
+3. Tạo ticket `TCK-UAT-20260917-01` cho `UAT_KCN-01`, gắn `UAT-KCN-HT-01` hoặc `UAT-KCN-KD-01`.
 4. Mở chi tiết, kiểm tra trạng thái, ưu tiên, SLA, bình luận.
 
-Kết quả mong đợi: ticket có timeline/bình luận, liên kết đúng khách hàng và hạ tầng cấp nước.
+Kết quả mong đợi: ticket có timeline/bình luận, liên kết đúng IIT và hạ tầng camera/lô đất.
 
-### UAT-06.02 Tạo ticket mới
+### UAT-06.02 Tạo và chuyển trạng thái ticket
 
 1. Bấm `Tạo phiếu`.
-2. Chọn khách hàng `TN-CUST-001` hoặc `UAT-CUS-20260916-01`.
-3. Chọn loại phản ánh nước/hạ tầng.
+2. Chọn khách `UAT_KCN-01`.
+3. Chọn loại phản ánh hạ tầng/camera.
 4. Gán ưu tiên, phòng ban xử lý nếu có.
 5. Lưu và chuyển trạng thái.
 
@@ -935,86 +816,102 @@ Kết quả mong đợi: ticket tạo được, SLA/audit cập nhật theo thao
 ### UAT-06.03 Thông báo
 
 1. Vào `Thông báo`.
-2. Kiểm tra inbox/log cho `uat.tranoc.park.admin@ipms.local` hoặc root admin.
-3. Tìm tiêu đề `Trà Nóc - Công nợ tháng 09 cần theo dõi`.
-4. Tạo thông báo thủ công nếu UI hỗ trợ.
+2. Kiểm tra inbox/log cho `uat.operator.kcn01@ipms.local` hoặc root admin.
+3. Tạo thông báo thủ công từ ticket/công nợ IIT nếu UI hỗ trợ.
 
 Kết quả mong đợi: thông báo hiển thị, nội dung không lộ secret/token. Provider email/SMS thật có thể `Blocked` nếu chưa cấu hình.
 
+---
+
 ## 11. E-invoice, chữ ký số và provider boundary
 
-Phần này chỉ kiểm tra trạng thái, hàng đợi, log và dữ liệu boundary. Không kết luận tích hợp live provider thành công nếu môi trường chưa có cấu hình chính thức.
+> **Tính năng này là gì:** 2 tích hợp biên nhưng test ở chế độ "giả lập biên" (boundary), không gọi nhà cung cấp thật. E-invoice là hóa đơn điện tử phát hành từ thông báo phí/phải thu (ví dụ từ `TBP-UAT-KTP-T09-IIT`). Chữ ký số là luồng ký tài liệu hợp đồng (`UAT-HD-LAND-2026-001`): tạo yêu cầu ký → vào hàng đợi (queue) → gửi → ký xong → có file đã ký. Trạng thái gồm nháp/chờ duyệt/đã gửi/đã ký/thất bại.
+>
+> **Cách hoạt động:** tạo yêu cầu (`EINV-UAT-20260917-01` / `SIGN-UAT-20260917-01`) từ dữ liệu IIT, sau đó bấm phát hành/đồng bộ. Vì chưa có cấu hình MISA/certificate thật nên hệ thống phải chặn lại ở biên: không gọi live, chỉ ghi log/queue/timeline rõ lý do (`provider_mapping_blocked`, thiếu certificate...), tuyệt đối không "fake thành công". Tester chỉ kiểm tra trạng thái nội bộ + log, không kết luận tích hợp live thành công.
+>
+> **Ví dụ với bộ IIT:** từ `REC-UAT-KTP-T09-IIT` tạo hóa đơn nháp; từ file hợp đồng `UAT-HD-SVC-2026-001` tạo yêu cầu ký, kiểm tra vào queue.
+>
+> **Lỗi hay gặp:** hệ thống báo thành công dù chưa cấu hình provider (lỗi nghiêm trọng), log không rõ lý do chặn, mã trùng lặp vẫn cho phát hành 2 lần, dữ liệu khác khu lọt vào.
 
 ### UAT-07.01 E-invoice boundary
 
 1. Vào module eInvoice/MISA nếu có trong menu.
-2. Tìm `EINV-BA-2026-08-001` để kiểm tra hóa đơn đã phát hành mẫu.
-3. Tìm `EINV-T11-BA-BOUNDARY-DRAFT`, `EINV-T11-BA-BOUNDARY-APPROVED`, `EINV-T11-BA-DUPLICATE-BLOCKED`, `EINV-T11-NH-NEG-SCOPE`.
-4. Tạo yêu cầu hóa đơn từ `FN-T09-BA-ANPHU-2026-09` hoặc một khoản phải thu nếu UI hỗ trợ.
-5. Thử bước phát hành/đồng bộ provider.
+2. Tạo yêu cầu hóa đơn từ `TBP-UAT-KTP-T09-IIT` hoặc `REC-UAT-KTP-T09-IIT` (mã gợi ý `EINV-UAT-20260917-01`).
+3. Thử bước phát hành/đồng bộ provider.
 
 Kết quả mong đợi: hệ thống không gọi live MISA khi chưa cấu hình; log provider boundary rõ ràng, không fake thành công live provider.
 
 ### UAT-07.02 Chữ ký số boundary
 
 1. Vào module chữ ký số.
-2. Tìm `SIGN-BA-HD-LEASE-001` để kiểm tra chứng từ đã ký mẫu.
-3. Tìm `SIGN-T12-BA-CONTRACT-READY`, `SIGN-T12-BA-APPENDIX-SENT`, `SIGN-T12-BA-CONTRACT-FAILED`, `SIGN-T12-FOREIGN-SCOPE-BLOCKED`.
-4. Tạo yêu cầu ký từ tài liệu hợp đồng nếu UI hỗ trợ.
-5. Kiểm tra queue/timeline/log.
+2. Tạo yêu cầu ký từ tài liệu hợp đồng `UAT-HD-LAND-2026-001` hoặc `UAT-HD-SVC-2026-001` (mã gợi ý `SIGN-UAT-20260917-01`).
+3. Kiểm tra queue/timeline/log.
 
 Kết quả mong đợi: yêu cầu ký vào queue/trạng thái nội bộ; live provider/certificate nằm ngoài phạm vi nếu chưa có cấu hình chính thức.
 
+---
+
 ## 12. Báo cáo và xuất file
 
-Phần này kiểm tra tính nhất quán giữa dữ liệu nguồn, số liệu tổng hợp, file export và lịch sử xuất file.
+> **Tính năng này là gì:** báo cáo là "bảng tổng hợp" lấy số từ các màn hình nghiệp vụ (khách, hợp đồng, billing, công nợ, ticket, hạ tầng). Export là nút tải bảng đó ra CSV/XLSX/PDF. Lịch sử export cho biết ai đã xuất file nào, khi nào, để tải lại.
+>
+> **Cách hoạt động:** chọn/lọc `Khu công nghiệp UAT` rồi mở báo cáo: số khách phải khớp 1 IIT (+ khách tester tự tạo), số hợp đồng khớp 4 `UAT-HD-*`, phải thu khớp `REC-UAT-KTP-T09-IIT`, kỳ khớp `UAT-KTP-T09`. Xuất file ra thì mở lên kiểm tra: font tiếng Việt không lỗi, tiêu đề/cột tiền/cột trạng thái đúng, số trong file khớp số trên màn hình. PDF chính thức có thể `Blocked by official template` nếu khách chưa chốt mẫu.
+>
+> **Ví dụ với bộ IIT:** báo cáo công nợ lọc `UAT-KCN-01` phải ra tổng 20756205 / còn 10756205 sau thanh toán 10 triệu; file tải về đọc được bằng Excel.
+>
+> **Lỗi hay gặp:** số báo cáo lệch số màn hình nguồn, lỗi font tiếng Việt trong Excel/PDF, cột tiền sai định dạng, lịch sử export thiếu bản ghi, không tải lại được file cũ.
 
 ### UAT-08.01 Báo cáo tổng quan
 
 1. Vào `Báo cáo & phân tích`.
-2. Kiểm tra danh mục báo cáo có `RPT_CUSTOMER_CONTRACTS`, `RPT_UTILITY_CONSUMPTION`, `RPT_BILLING_FINANCE`, `RPT_SUPPLIER_DEBT`, `RPT_INFRASTRUCTURE_OPERATIONS`, `RPT_TICKET_SLA`.
-3. Chọn/lọc `Khu công nghiệp Trà Nóc` để đối chiếu 5 doanh nghiệp, 5 hợp đồng, 5 khoản phải thu `REC-TN-*`.
-4. Chọn/lọc bộ Bắc An/T09 để đối chiếu billing/utility/provider theo các mã ở mục 3.7-3.14.
+2. Lọc `Khu công nghiệp UAT` để đối chiếu 1 khách IIT, 4 hợp đồng `UAT-HD-*`, phải thu `REC-UAT-KTP-T09-IIT`, kỳ `UAT-KTP-T09`.
 
 Kết quả mong đợi: số liệu báo cáo không mâu thuẫn với danh sách nguồn.
 
 ### UAT-08.02 Xuất Excel/PDF
 
-1. Xuất CSV/XLSX ở khách hàng, hợp đồng, tài chính, báo cáo.
+1. Xuất CSV/XLSX ở khách hàng, hợp đồng, tài chính, báo cáo (lọc `UAT-KCN-01`).
 2. Mở file tải về.
 3. Kiểm tra font tiếng Việt, tiêu đề, cột tiền, cột trạng thái.
-4. Kiểm tra export history/audit có các file seed `bao-cao-cong-no-bac-an-t10.xlsx`, `bao-cao-doi-soat-phieu-thu-t09.xlsx`, `bao-cao-cong-no-nha-cung-cap-t09.xlsx`, `bao-cao-sla-ticket-bac-an-t10.pdf`.
 
 Kết quả mong đợi: file đọc được, không lỗi font tiếng Việt; PDF chính thức có thể `Blocked by official template`.
 
+---
+
 ## 13. Phân quyền và audit
 
-Phần này xác nhận người dùng chỉ nhìn thấy dữ liệu đúng phạm vi park/doanh nghiệp, đồng thời các hành động nhạy cảm có audit đầy đủ.
+> **Tính năng này là gì:** phân quyền đảm bảo "ai chỉ thấy phần của mình": park admin chỉ thấy khu `UAT-KCN-01`, IIT admin/user chỉ thấy công ty `UAT_KCN-01`. Audit (nhật ký) ghi lại ai đã làm gì, trên bản ghi nào, lúc nào — dùng để truy vết khi có sai sót tiền/quyền. Đọc kỹ giải thích không kỹ thuật ở mục 15 trước khi test mục này.
+>
+> **Cách hoạt động:** đăng nhập từng tài khoản (`uat.operator.kcn01@`, `uat.iit.admin@`, `uat.iit.user@`) rồi thử: thấy đúng dữ liệu mình, không thấy dữ liệu người khác, gõ URL trực tiếp (`/admin`, `/customers/new`) thì bị chặn, nút tạo/sửa ẩn đúng chỗ. Sau đó đăng nhập root vào `Nhật ký` lọc theo login/tạo user/tạo khách/tạo hợp đồng/thanh toán/export/run `BR-UAT-KTP-T09-001`: mỗi dòng phải có actor/action/entity/timestamp, không lộ mật khẩu/token.
+>
+> **Ví dụ với bộ IIT:** IIT user mở `UAT-HD-LAND-2026-001` của mình thì được, mở khách khác thì bị chặn; park admin mở khu khác thì bị chặn; audit phải ghi đủ vụ thanh toán 10 triệu `PAY-UAT-IIT-2026-10-001`.
+>
+> **Lỗi hay gặp:** tenant thấy được công ty khác (lỗi scope nghiêm trọng), nút tạo/sửa hiện sai chỗ, gõ URL trực tiếp vẫn vào được trang cấm, audit thiếu actor/timestamp hoặc lộ secret.
 
-### UAT-09.01 User park admin Trà Nóc
+### UAT-09.01 User vận hành KCN-01
 
 1. Đăng xuất root admin.
-2. Đăng nhập `uat.tranoc.park.admin@ipms.local`.
-3. Kiểm tra chỉ thấy dữ liệu trong `Khu công nghiệp Trà Nóc`.
-4. Thử mở dữ liệu khu khác bằng URL trực tiếp nếu có mã.
+2. Đăng nhập `uat.operator.kcn01@ipms.local`.
+3. Kiểm tra chỉ thấy dữ liệu trong `Khu công nghiệp UAT`.
+4. Thử mở dữ liệu KCN khác bằng URL trực tiếp nếu có mã.
 5. Kiểm tra menu quản trị hệ thống chỉ hiện khi role có quyền admin phù hợp.
 
 Kết quả mong đợi: dữ liệu ngoài phạm vi bị chặn hoặc không hiển thị.
 
-### UAT-09.02 User quản trị doanh nghiệp Mekong Xanh
+### UAT-09.02 User quản trị doanh nghiệp IIT
 
-1. Đăng nhập `uat.tranoc.mekongxanh@ipms.local`.
-2. Kiểm tra chỉ thấy dữ liệu liên quan `TN-CUST-001`.
-3. Thử tìm `TN-CUST-003` hoặc `TN-CON-FACT-001`.
+1. Đăng nhập `uat.iit.admin@ipms.local`.
+2. Kiểm tra chỉ thấy dữ liệu liên quan `UAT_KCN-01`.
+3. Thử tìm khách hàng khác (`UAT-CUS-20260917-01` nếu đã tạo ở UAT-02.02).
 4. Thử mở `/admin` và `/admin/users/new` bằng URL trực tiếp.
 
 Kết quả mong đợi: tenant không thấy dữ liệu doanh nghiệp khác và không vào được chức năng quản trị người dùng.
 
-### UAT-09.03 User doanh nghiệp Sông Hậu
+### UAT-09.03 User doanh nghiệp IIT thường
 
-1. Đăng nhập `uat.tranoc.songhau@ipms.local`.
-2. Kiểm tra chỉ thấy dữ liệu liên quan `TN-CUST-003`.
-3. Thử mở `TN-CUST-001`, `TN-CON-LAND-001`, `/customers/new` hoặc màn hình sửa khách hàng bằng URL trực tiếp.
+1. Đăng nhập `uat.iit.user@ipms.local`.
+2. Kiểm tra chỉ thấy dữ liệu liên quan `UAT_KCN-01`.
+3. Thử mở khách hàng khác, `/customers/new` hoặc màn hình sửa khách hàng bằng URL trực tiếp.
 
 Kết quả mong đợi: dữ liệu ngoài doanh nghiệp bị chặn hoặc trả không tìm thấy; nút tạo/sửa/lưu trữ khách hàng không hiển thị.
 
@@ -1022,9 +919,11 @@ Kết quả mong đợi: dữ liệu ngoài doanh nghiệp bị chặn hoặc tr
 
 1. Đăng nhập lại root admin.
 2. Vào `Quản trị hệ thống` -> `Nhật ký` hoặc audit.
-3. Lọc các action: login, tạo user, tạo khách hàng, tạo hợp đồng, thanh toán, export.
+3. Lọc các action: login, tạo user, tạo khách hàng, tạo hợp đồng, thanh toán, export, run billing `BR-UAT-KTP-T09-001`.
 
 Kết quả mong đợi: audit có actor, action, entity, timestamp; không lộ mật khẩu/token/API key.
+
+---
 
 ## 14. Điều kiện sign-off UAT
 
@@ -1034,7 +933,7 @@ QA/Test Lead chỉ đề xuất ký UAT khi các điều kiện sau được đ�
 
 1. Toàn bộ case bắt buộc trong tài liệu này đã có kết quả và bằng chứng.
 2. Không còn lỗi `Blocker` hoặc `High` chưa có phương án xử lý/được chấp nhận rủi ro bằng văn bản.
-3. Các case liên quan tiền, công nợ, phân quyền và dữ liệu liên module đã được đại diện nghiệp vụ xác nhận.
+3. Các case liên quan tiền, công nợ, phân quyền và dữ liệu liên module đã được đại diện nghiệp vụ xác nhận (đối chiếu `TBP/REC/PAY-UAT-*`, `DH-*-UAT-001`, phân quyền `UAT-KCN-01`/`UAT_KCN-01`).
 4. Các nội dung `Blocked` đều có lý do rõ ràng, chủ sở hữu xử lý và quyết định đưa vào phase sau hoặc điều kiện go-live.
 5. Danh sách dữ liệu `UAT-*` do tester tạo đã được tổng hợp để phục vụ dọn dữ liệu hoặc giữ lại làm bằng chứng.
 6. Biên bản tổng hợp UAT đã đính kèm ảnh màn hình, file export, defect log và quyết định xử lý defect.
@@ -1054,6 +953,8 @@ QA/Test Lead chỉ đề xuất ký UAT khi các điều kiện sau được đ�
 | Báo cáo/export |  |  |  |  |
 | Defect còn mở được chấp nhận |  |  |  |  |
 
+> Mẹo Notion: sau khi import, bôi đen bảng này và bảng 14.3 → Turn into → Board view để tick theo dõi từng hạng mục.
+
 ### 14.3 Phê duyệt lưu hành
 
 | Vai trò | Họ tên | Chữ ký/Xác nhận | Ngày |
@@ -1064,3 +965,285 @@ QA/Test Lead chỉ đề xuất ký UAT khi các điều kiện sau được đ�
 | Đại diện nghiệp vụ khách hàng |  |  |  |
 
 Tài liệu có hiệu lực cho vòng UAT web MVP kể từ ngày ban hành ở mục `Kiểm soát tài liệu`. Mọi thay đổi sau khi phát hành phải được ghi nhận trong lịch sử thay đổi và được QA/Test Lead xác nhận trước khi sử dụng lại cho tester.
+
+---
+
+## 15. Cấu hình quyền cho từng vai trò — viết cho người không kỹ thuật
+
+> Mục này đọc độc lập được. Không cần biết code, API hay database. Chỉ cần biết đăng nhập web và đối chiếu với bộ seed `UAT-KCN-01 / Công ty cổ phần IIT` trong `documents/uat-manual-seed-data.md`.
+
+### 15.1 Hiểu nhanh 2 khái niệm: vai trò và phạm vi
+
+Hãy hình dung IPMS như một khu công nghiệp có nhiều cổng và nhiều phòng:
+
+- **Vai trò (role)** = chiếc thẻ nhân viên của bạn. Thẻ ghi bạn là ai: ban quản lý toàn hệ thống, ban quản lý khu, nhân viên khu, quản trị công ty thuê, nhân viên công ty thuê.
+- **Phạm vi (scope)** = khu vực mà thẻ của bạn mở được cửa. Có 3 loại phạm vi trong hệ thống:
+  - `Toàn hệ thống (system)`: mở mọi cửa, mọi khu, mọi công ty. Chỉ dành cho quản trị cao nhất.
+  - `Khu công nghiệp (park)`: chỉ mở được cửa trong 1 khu được giao, ví dụ `Khu công nghiệp UAT (UAT-KCN-01)`. Không nhìn thấy khu khác.
+  - `Doanh nghiệp (customer)`: chỉ mở được cửa của đúng 1 công ty trong 1 khu, ví dụ `Công ty cổ phần IIT (UAT_KCN-01)` trong `UAT-KCN-01`. Không nhìn thấy công ty khác.
+
+Nguyên tắc vàng: **thấy ít là đúng, thấy nhiều là sai**. Nếu bạn là công ty IIT mà lại thấy được công ty khác, đó là lỗi phải báo ngay.
+
+### 15.2 Có những vai trò nào trong đợt UAT này
+
+Hệ thống có 5 vai trò chuẩn. Đợt UAT này dùng 4 vai trò dưới đây (vai trò còn lại `PARK_STAFF` hiểu tương tự `PARK_ADMIN` nhưng quyền thấp hơn, khi nào cần thì QA sẽ cấp):
+
+| Vai trò | Hiểu nôm na | Tài khoản UAT tương ứng | Phạm vi |
+| --- | --- | --- | --- |
+| `ROOT_ADMIN` | Ban quản lý toàn hệ thống | `admin@ipms.local` | Toàn hệ thống |
+| `PARK_ADMIN` | Ban quản lý khu UAT | `uat.operator.kcn01@ipms.local` | Khu `UAT-KCN-01` |
+| `ENTERPRISE_ADMIN` | Giám đốc công ty IIT | `uat.iit.admin@ipms.local` | Công ty `UAT_KCN-01` trong khu `UAT-KCN-01` |
+| `ENTERPRISE_USER` | Nhân viên công ty IIT | `uat.iit.user@ipms.local` | Công ty `UAT_KCN-01` trong khu `UAT-KCN-01` |
+| `PARK_STAFF` | Nhân viên khu (khi cần) | Tạo thêm nếu cần, ví dụ `uat.staff.kcn01@ipms.local` | Khu `UAT-KCN-01` |
+
+> Cả 3 tài khoản `uat.*` đều do `admin@ipms.local` tạo trên màn hình `Quản trị hệ thống -> Người dùng` theo đúng UAT-01.03/UAT-01.04. Mật khẩu quy ước `Demo@123456`. Nếu không đăng nhập được thì ghi `Blocked by credential`, đừng tự đoán mật khẩu.
+
+### 15.3 Từng vai trò được thấy gì, được làm gì
+
+#### A. `ROOT_ADMIN` — `admin@ipms.local` (quản trị toàn hệ thống)
+
+- **Được thấy:** mọi khu, mọi cụm (`UAT-LO-A/B`), mọi lô (`UAT-KCN-KD-01`), hạ tầng (`UAT-KCN-HT-01`), tài sản (`UAT_ASSET1`), mọi khách hàng (IIT + khách tester tự tạo), mọi hợp đồng (`UAT-HD-*`), kỳ tính phí (`UAT-KTP-T09`), đồng hồ (`DH-*-UAT-001`), thông báo phí/phải thu/thanh toán (`TBP/REC/PAY-UAT-*`), ticket, báo cáo, nhật ký.
+- **Được làm:** tạo/sửa user mọi phạm vi, tạo KCN/cụm/phòng ban, tạo khách/hợp đồng/kỳ/biểu giá/đồng hồ, chạy tính phí, ghi nhận thanh toán, xuất báo cáo, xem nhật ký, cấu hình hệ thống (ví dụ email SMTP).
+- **Không nên làm hàng ngày:** đừng dùng root để nhập liệu nghiệp vụ thường xuyên. Root chỉ dùng để tạo user, kiểm tra tổng và xem nhật ký. Dùng xong thì đăng xuất.
+- **Tự kiểm tra 1 phút:** đăng nhập root, vào `Quản trị hệ thống`, tìm `UAT-KCN-01` và `UAT_KCN-01` đều thấy. Vào `Tài chính` tìm `REC-UAT-KTP-T09-IIT` thấy được. Như vậy là đúng.
+
+#### B. `PARK_ADMIN` — `uat.operator.kcn01@ipms.local` (ban quản lý khu UAT)
+
+- **Được thấy:** chỉ trong `Khu công nghiệp UAT (UAT-KCN-01)`. Thấy cụm `UAT-LO-A/B`, lô `UAT-KCN-KD-01`, GIS `GIS-UAT-KCN-KD-01`, camera `UAT-KCN-HT-01`, tài sản `UAT_ASSET1`, khách IIT, 4 hợp đồng `UAT-HD-*`, kỳ `UAT-KTP-T09`, phải thu/thanh toán của IIT, ticket của khu.
+- **Được làm:** tạo user cho khu mình và cho doanh nghiệp trong khu mình (`PARK_ADMIN`, `PARK_STAFF`, `ENTERPRISE_ADMIN`, `ENTERPRISE_USER`), tạo khách/hợp đồng/đồng hồ/kỳ trong khu mình, xử lý ticket, xuất báo cáo lọc khu mình.
+- **Không được làm:** không tạo được `ROOT_ADMIN`, không tạo user toàn hệ thống, không xem/sửa dữ liệu khu khác (nếu gõ URL khu khác thì phải bị chặn hoặc báo không tìm thấy).
+- **Ví dụ đúng:** đăng nhập park admin, lọc khu `UAT-KCN-01` thì thấy IIT và `REC-UAT-KTP-T09-IIT`. Thử tìm khách `UAT-CUS-20260917-01` (nếu tester đã tạo trong khu này) thì vẫn thấy vì cùng khu.
+- **Ví dụ sai cần báo lỗi:** park admin mà thấy được khu khác, hoặc tự tạo được user `ROOT_ADMIN`. Gặp trường hợp này thì ghi `Fail` + chụp màn hình.
+
+#### C. `ENTERPRISE_ADMIN` — `uat.iit.admin@ipms.local` (quản trị công ty IIT)
+
+- **Được thấy:** chỉ đúng công ty mình `UAT_KCN-01` trong khu `UAT-KCN-01`. Thấy lô `UAT-KCN-KD-01` mà công ty mình thuê, hợp đồng `UAT-HD-*` của mình, đồng hồ `DH-*-UAT-001` của mình, thông báo phí `TBP-UAT-KTP-T09-IIT`, phải thu `REC-UAT-KTP-T09-IIT`, ticket do mình gửi.
+- **Được làm:** xem/sửa thông tin công ty mình (tùy cấu hình), gửi ticket mới, xem công nợ và thanh toán của mình, tải hợp đồng/hóa đơn/báo cáo của mình, tạo thêm `ENTERPRISE_USER` cùng công ty mình.
+- **Không được làm:** không vào `Quản trị hệ thống` tạo user khu/hệ thống, không thấy công ty khác (ví dụ `UAT-CUS-20260917-01`), không thấy tiền của công ty khác, không mở được trang `/admin` hay `/admin/users/new` (phải bị chặn), không vào được mua hàng nhà cung cấp phía khu (supplier payables).
+- **Tự kiểm tra 1 phút:** đăng nhập IIT admin, tìm `UAT_KCN-01` thì thấy; tìm khách khác thì không thấy. Mở `UAT-HD-LAND-2026-001` của mình thì được; mở hợp đồng công ty khác thì phải báo không tìm thấy hoặc không có quyền.
+
+#### D. `ENTERPRISE_USER` — `uat.iit.user@ipms.local` (nhân viên công ty IIT)
+
+- **Được thấy:** giống IIT admin nhưng ít hơn. Chỉ xem dữ liệu công ty `UAT_KCN-01`: hợp đồng, công nợ, ticket, thông báo của mình.
+- **Được làm:** xem, gửi ticket, xem tiến độ xử lý, tải file của công ty mình.
+- **Không được làm:** không tạo/sửa khách hàng (nút `Thêm khách hàng` / `Lưu` phải ẩn), không tạo user, không vào `/customers/new` hay màn hình sửa khách hàng bằng đường dẫn gõ tay (phải bị chặn), không thấy/sửa dữ liệu công ty khác.
+- **Tự kiểm tra 1 phút:** đăng nhập IIT user, vào `Quản lý khách hàng` thì không thấy nút tạo mới. Gõ tay `/customers/new` thì phải bị chặn. Mở `TN`/`CUS-BA` hay khách khác thì không được.
+
+### 15.4 Ma trận nhanh: ai được làm gì với bộ UAT-KCN-01
+
+Dấu `Được` = phải làm được; `Không` = phải bị chặn hoặc bị ẩn nút. Nếu ngược lại thì đó là lỗi.
+
+| Việc cần kiểm tra | `ROOT_ADMIN` | `PARK_ADMIN` (khu UAT) | `ENTERPRISE_ADMIN` (IIT) | `ENTERPRISE_USER` (IIT) |
+| --- | --- | --- | --- | --- |
+| Xem KCN `UAT-KCN-01`, cụm `UAT-LO-A/B` | Được | Được (chỉ khu mình) | Được (chỉ để biết mình thuộc khu nào) | Được (chỉ xem) |
+| Xem lô `UAT-KCN-KD-01`, GIS `GIS-UAT-KCN-KD-01`, camera `UAT-KCN-HT-01`, tài sản `UAT_ASSET1` | Được | Được | Được (chỉ phần liên quan IIT) | Được (chỉ xem) |
+| Xem/sửa khách `UAT_KCN-01` (IIT) | Được | Được | Được xem (sửa hạn chế) | Được xem |
+| Xem khách công ty khác | Được | Được nếu cùng khu | Không | Không |
+| Tạo khách hàng mới | Được | Được trong khu mình | Không | Không (nút phải ẩn) |
+| Xem hợp đồng `UAT-HD-*` của IIT | Được | Được | Được (của IIT) | Được xem |
+| Tạo hợp đồng mới | Được | Được trong khu mình | Không (hoặc hạn chế) | Không |
+| Xem kỳ `UAT-KTP-T09`, đồng hồ `DH-*-UAT-001`, biểu giá `BG-*-UAT-001` | Được | Được | Được xem của IIT | Được xem |
+| Xem `TBP/REC-UAT-KTP-T09-IIT`, tạo `PAY-UAT-*` | Được | Được | Được xem của IIT | Được xem |
+| Xem tiền/NCC phía khu (supplier payables) | Được | Được | Không | Không |
+| Tạo ticket cho IIT (`TCK-UAT-*`) | Được | Được | Được | Được |
+| Xem ticket công ty khác | Được | Được trong khu | Không | Không |
+| Vào `/admin`, `/admin/users/new` | Được | Hạn chế (chỉ tạo user khu/doanh nghiệp, không tạo root) | Không | Không |
+| Tạo user `ROOT_ADMIN` | Được (chỉ root) | Không | Không | Không |
+| Xem nhật ký/audit | Được | Được trong khu (tùy quyền) | Không hoặc rất hạn chế | Không |
+
+### 15.5 Cách tạo user đúng để không bị lỗi quyền (dành cho người giao UAT)
+
+Chỉ `admin@ipms.local` mới tạo được đủ 3 loại user. Làm đúng 4 bước này trên màn hình `Quản trị hệ thống -> Người dùng -> Tạo người dùng`:
+
+1. **Chọn vai trò trước:** muốn tạo ai thì chọn đúng thẻ: `PARK_ADMIN` cho ban quản lý khu, `ENTERPRISE_ADMIN` cho giám đốc IIT, `ENTERPRISE_USER` cho nhân viên IIT.
+2. **Chọn khu bằng ô chọn sẵn (select), đừng gõ tay:** ô `Park ID` phải hiện chữ `Khu công nghiệp UAT`, đừng gõ mã `UAT-KCN-01` hay dãy số dài. Nếu ô này bắt gõ tay thì báo lỗi UAT-01.03.
+3. **Nếu là user doanh nghiệp thì chọn công ty bằng ô chọn sẵn:** ô `Customer ID` phải hiện chữ `Công ty cổ phần IIT`, danh sách này phải tự lọc theo khu đã chọn ở bước 2. Nếu không lọc thì báo lỗi UAT-01.04.
+4. **Lưu rồi mở lại để kiểm tra:** mở chi tiết user vừa tạo, xem đúng vai trò + đúng khu/công ty chưa. Đăng nhập thử 1 lần bằng user đó.
+
+Ai được tạo ai (nhớ để không giao sai):
+
+- Root tạo được tất cả, kể cả root khác.
+- Park admin chỉ tạo được `PARK_ADMIN`, `PARK_STAFF`, `ENTERPRISE_ADMIN`, `ENTERPRISE_USER` trong khu mình. Không tạo được root.
+- IIT admin chỉ tạo được `ENTERPRISE_ADMIN`, `ENTERPRISE_USER` cùng công ty IIT. Không tạo được user khu hay root.
+
+Lỗi hay gặp khi tạo user:
+
+| Hiện tượng | Nghĩa đơn giản | Ghi kết quả thế nào |
+| --- | --- | --- |
+| Báo `400 BAD_REQUEST` khi lưu | Form thiếu hoặc sai trường bắt buộc, hoặc chọn sai phạm vi | `Fail`, ghi rõ đã nhập gì, vai trò gì, khu/công ty gì |
+| Ô khu/công ty bắt gõ mã dài | UI chưa làm ô chọn, dễ gõ sai | `Fail` UAT-01.03/01.04 |
+| Tạo được user nhưng đăng nhập báo sai mật khẩu | Mật khẩu seed bị đổi khi rebuild | `Blocked by credential`, báo QA |
+| Park admin tạo được root | Lỗi phân quyền nghiêm trọng | `Fail`, mức Blocker, báo ngay |
+
+### 15.6 Tự kiểm tra quyền trong 10 phút với bộ IIT (không cần kỹ thuật)
+
+Làm đúng thứ tự này, mỗi bước chụp 1 ảnh:
+
+1. Đăng nhập root, mở `UAT-KCN-KD-01`, `UAT-HD-LAND-2026-001`, `REC-UAT-KTP-T09-IIT` đều thấy -> `Pass`.
+2. Đăng xuất, đăng nhập park admin `uat.operator.kcn01@`. Vào lại 3 màn hình trên vẫn thấy. Thử gõ URL khu khác (nếu có) -> phải bị chặn hoặc không thấy -> `Pass` nếu bị chặn.
+3. Đăng xuất, đăng nhập IIT admin `uat.iit.admin@`. Tìm `UAT_KCN-01` thấy; tìm khách khác không thấy. Mở `/admin` -> phải bị chặn. Mở `UAT-HD-SVC-2026-001` của mình -> thấy.
+4. Đăng xuất, đăng nhập IIT user `uat.iit.user@`. Vào `Quản lý khách hàng` -> không thấy nút tạo mới. Gõ tay `/customers/new` -> phải bị chặn. Mở hợp đồng IIT -> chỉ xem.
+5. Đăng nhập lại root, vào `Nhật ký`/audit, lọc hành động đăng nhập/tạo user/tạo khách/thanh toán/export -> thấy đủ ai làm, làm gì, lúc nào, không lộ mật khẩu.
+
+Nếu bước nào ngược lại (ví dụ IIT user lại tạo được khách, IIT admin lại mở được `/admin`, park admin lại thấy khu khác) thì ghi `Fail` + chụp ảnh + ghi URL + giờ test.
+
+### 15.7 Đọc thông báo lỗi quyền mà không sợ
+
+Hệ thống chặn sai phạm vi bằng mã lỗi. Người không kỹ thuật chỉ cần nhớ bảng này:
+
+| Mã hệ thống báo | Hiểu đơn giản | Có phải lỗi không |
+| --- | --- | --- |
+| `403 park_scope_forbidden` | Bạn đang cố mở dữ liệu khu khác, hệ thống chặn đúng | `Pass` cho case phân quyền (chặn đúng là tốt) |
+| `403 customer_scope_forbidden` | Bạn đang cố mở dữ liệu công ty khác, hệ thống chặn đúng | `Pass` cho case phân quyền |
+| `403 permission_denied` | Thẻ của bạn không có quyền làm việc này | `Pass` nếu đúng là việc bạn không được làm; `Fail` nếu đó là việc bạn phải làm được |
+| `403 provisioning_scope_forbidden` | Bạn đang cố tạo user to hơn quyền của mình (ví dụ park admin tạo root) | `Pass` nếu bị chặn |
+| `400 park_scope_required` | Thiếu chọn khu, hãy chọn `UAT-KCN-01` rồi thử lại | Thường là thao tác thiếu, không phải lỗi hệ thống |
+| Vào trang trắng hoặc `500` | Hệ thống lỗi thật | `Fail`, ghi URL + giờ + tài khoản |
+
+---
+
+### Phụ lục A. Đối chiếu bản 1.1 → 1.2 (lịch sử)
+
+| Nhóm | Bản 1.1 (Trà Nóc/Bắc An, đã bỏ) | Bản 1.2 (seed tay, đang dùng) |
+| --- | --- | --- |
+| KCN/cụm | `KCN-TRA-NOC`, `TRA-NOC-A/B`, `IPMS-PARK-01`, `BAC-AN-A/B` | `UAT-KCN-01`, `UAT-LO-A/B` |
+| Khách | `TN-CUST-001..005`, `CUS-BA-*`, `CUS-T05-BA-001` | `UAT_KCN-01` (IIT) + `UAT-CUS-20260917-01` tự tạo |
+| Hợp đồng | `TN-CON-*`, `HD-BA-*` | `UAT-HD-01`, `UAT-HD-LAND-2026-001`, `UAT-HD-ASSET-2026-001`, `UAT-HD-SVC-2026-001` |
+| Lô/GIS/hạ tầng | `TN-LOT-*/FAC-*/INF-*`, `GIS-T07-*` | `UAT-KCN-KD-01`, `GIS-UAT-KCN-LOT`, `GIS-UAT-KCN-KD-01`, `UAT-KCN-HT-01`, `UAT_ASSET1` |
+| Billing | `BP-*/TRF-*/MTR-*/T09-*/FN-*` | `UAT-KTP-T09`, `BG-*-UAT-001`, `DH-*-UAT-001`, `BR-UAT-KTP-T09-001`, `TBP-UAT-KTP-T09-IIT` |
+| Tài chính | `REC-TN-*`, `PAY-TN-*`, `AP-*/NCC-*` | `REC-UAT-KTP-T09-IIT`, `PAY-UAT-IIT-2026-10-001`, NCC tự tạo `UAT-SUP-*` |
+| Ticket/notify | `TCK-TN-*`, `TCK-2026-*`, `TCK-T08-*` | Tự tạo `TCK-UAT-*` từ IIT |
+| User | `uat.tranoc.*` | `uat.operator.kcn01@`, `uat.iit.*@` tự tạo |
+| eInvoice/sign | `EINV-*/SIGN-*` Bắc An/T11/T12 | Tạo mới `EINV-UAT-*` / `SIGN-UAT-*` từ `TBP-UAT-*` / `UAT-HD-*` |
+
+---
+
+### Phụ lục B. Công thức tính điện, nước, nước thải, rác, dịch vụ hạ tầng, tiền thuê
+
+> Đọc cho tester không kỹ thuật. Mọi công thức dưới đây dùng đúng mã seed `UAT-KCN-01 / IIT` (`BG-*-UAT-001`, `DH-*-UAT-001`, `UAT-KTP-T09`). Quy ước: số tiền làm tròn tới đồng (VND), VAT tính trên số trước VAT sau mọi phụ phí/phạt, tổng sau VAT = trước VAT + VAT. Hệ số nhân đồng hồ (`multiplier`) mặc định 1 với bộ IIT.
+
+#### B.0 Công thức chốt chỉ số (dùng chung cho mọi đồng hồ)
+
+- Sản lượng tổng = (chỉ số tổng mới − chỉ số tổng cũ) × hệ số nhân. Chú thích: số mới phải ≥ số cũ, nếu âm là lỗi nhập liệu, hệ thống phải chặn.
+- Với đồng hồ điện 3 khung giờ, thêm 3 sản lượng thành phần, mỗi loại tính riêng rồi cộng lại:
+  - Bình thường = (bình thường mới − bình thường cũ) × hệ số.
+  - Cao điểm = (cao điểm mới − cao điểm cũ) × hệ số.
+  - Thấp điểm = (thấp điểm mới − thấp điểm cũ) × hệ số.
+  - Ràng buộc hệ thống kiểm tra: tổng 3 khung phải bằng sản lượng tổng. Nếu lệch thì báo lỗi `band deltas` và không cho lưu.
+- Ví dụ IIT (`DH-DIEN-UAT-001`, hệ số 1, ngày 30/09/2026): tổng 42150 − 32000 = 10150 kWh; bình thường 26200 − 20000 = 6200; cao điểm 9400 − 7000 = 2400; thấp điểm 6550 − 5000 = 1550; 6200 + 2400 + 1550 = 10150 nên hợp lệ.
+- Nước (`DH-NUOC-UAT-001`): 1045 − 820 = 225 m3. Nước thải (`DH-NUOC-THAI-UAT-001`): 785 − 610 = 175 m3.
+
+#### B.1 Tiền điện 3 khung giờ + phạt COSφ (`BG-DIEN-UAT-001`)
+
+Áp dụng cho `service_type = electricity`, `calculation_mode = electricity_time_of_use`, thuế 8%.
+
+```text
+Tiền từng khung = sản lượng khung × đơn giá khung
+  Bình thường = Q_normal × 1850
+  Cao điểm   = Q_peak   × 3100
+  Thấp điểm  = Q_offpeak × 1200
+Tiền năng lượng = Bình thường + Cao điểm + Thấp điểm
+Phạt COSφ = Tiền năng lượng × 5%  nếu (bật phạt VÀ COSφ đo được < 0.9)
+          = 0                     nếu COSφ ≥ 0.9 hoặc tắt phạt
+Trước VAT = Tiền năng lượng + Phạt COSφ
+VAT       = Trước VAT × 8%
+Tổng      = Trước VAT + VAT
+```
+
+- Chú thích COSφ: là hệ số công suất, đo chất lượng dùng điện. Ngưỡng 0.9 nghĩa là dưới 0.9 thì bị phạt. Tỷ lệ phạt 5% tính trên tiền năng lượng (mã nội bộ `flat_percentage_of_energy_amount`), không tính trên VAT. Chỉ số phản kháng kVArh (ví dụ 980) chỉ để tham khảo, không đưa vào công thức tiền.
+- Ví dụ IIT bị phạt (COSφ 0.86 < 0.9): 6200×1850 = 11470000; 2400×3100 = 7440000; 1550×1200 = 1860000; năng lượng = 20770000; phạt = 20770000×5% = 1038500; trước VAT = 21808500; VAT = 21808500×8% = 1744680; tổng = 23553180.
+- Ví dụ không phạt (bộ seed cũ, COSφ 0.92 ≥ 0.9): tổng 18680 − 12500 = 6180 kWh thì phạt = 0, trước VAT = tiền năng lượng, chỉ cộng VAT 8%.
+- Tester đối chiếu ở UAT-05.04: mở đồng hồ `DH-DIEN-UAT-001` kiểm tra 4 số (tổng + 3 khung + COSφ), sau đó đối chiếu dòng tiền điện trong run `BR-UAT-KTP-T09-001` theo đúng 5 bước trên.
+
+#### B.2 Tiền nước sạch (`BG-NUOC-UAT-001`)
+
+Bộ IIT đang dùng giá phẳng (flat), thuế 5%. Nếu sau này có bậc thang (tiered) thì dùng công thức bậc thang bên dưới.
+
+```text
+Dạng phẳng (đang dùng cho IIT):
+Trước VAT = sản lượng m3 × 12500
+VAT       = Trước VAT × 5%
+Tổng      = Trước VAT + VAT
+Ví dụ IIT: 225 × 12500 = 2812500; VAT = 140625; tổng = 2953125.
+(Kết quả seed mục 3.7 ghi 2812500/140625/2953125 khớp công thức này.)
+
+Dạng bậc thang (khi có tariff_tiers, để tester hiểu nếu gặp ở môi trường khác):
+Trước VAT = 500×11800 + phần vượt×13200  (ví dụ 620 m3 = 500×11800 + 120×13200 = 7484000)
+VAT = Trước VAT × 5%; Tổng = Trước VAT + VAT.
+```
+
+- Chú thích: nước không có khung giờ, không có COSφ. Hệ thống từ chối biểu giá nước có `time_band_rates` hoặc thiếu giá phẳng.
+- Tester đối chiếu ở UAT-05.04: chỉ số 820→1045 = 225 m3 rồi nhân 12500.
+
+#### B.3 Tiền xử lý nước thải (`BG-NUOC-THAI-UAT-001`)
+
+Tương tự nước sạch, thuế 5%, không khung giờ, không COSφ.
+
+```text
+Dạng phẳng (đang dùng cho IIT):
+Trước VAT = sản lượng m3 × 8200
+VAT       = Trước VAT × 5%
+Tổng      = Trước VAT + VAT
+Ví dụ IIT: 175 × 8200 = 1435000; VAT = 71750; tổng = 1506750.
+(Khớp số seed mục 3.7: 1435000/71750/1506750.)
+
+Dạng bậc thang (tham khảo): 500×8200 + phần vượt×9100, ví dụ 590 m3 = 500×8200 + 90×9100 = 4919000, rồi cộng VAT 5%.
+```
+
+#### B.4 Tiền rác thải (`BG-RAC-UAT-001`)
+
+Bộ IIT dùng theo khối lượng (`calculation_mode = waste_volume`), thuế 5%. Lấy khối lượng đầu vào (input), không lấy đầu ra.
+
+```text
+Trước VAT = khối lượng đầu vào (kg) × 1500
+VAT       = Trước VAT × 5%
+Tổng      = Trước VAT + VAT
+Ví dụ chính IIT (industrial, 30/09/2026): 1250 × 1500 = 1875000; VAT = 93750; tổng = 1968750.
+Ví dụ thêm: domestic 620 × 1500 = 930000; hazardous 85 × 1500 = 127500 (mỗi loại tính riêng nếu có nhiều bản ghi).
+```
+
+- Chú thích: phương pháp xử lý (`sorting/composting/incineration`) và khối lượng đầu ra (1180/590/80) chỉ để theo dõi vận hành, không đưa vào công thức tiền. Một số môi trường khác có thể dùng phí cố định theo khách (`fixed_per_customer`, ví dụ 220000/khách/tháng) — khi đó trước VAT = `base_fee`, không nhân khối lượng.
+- Tester đối chiếu ở UAT-05.04: kiểm tra ngày vận hành + loại rác + khối lượng vào, sau đó đối chiếu dòng rác trong run.
+
+#### B.5 Phí dịch vụ hạ tầng chung (`BG-DVHT-UAT-001` / dòng 350000 trong seed)
+
+Phí cố định theo kỳ (fixed), thuế 5%.
+
+```text
+Trước VAT = 350000 (base_fee theo tháng/kỳ, từ hợp đồng UAT-HD-ASSET-2026-001)
+VAT       = 350000 × 5% = 17500
+Tổng      = 367500
+```
+
+- Chú thích: không phụ thuộc đồng hồ hay khối lượng. Nếu có phân bổ theo diện tích hợp đồng (`allocation_basis = contract_area`) thì hệ thống chia theo m2, nhưng bộ IIT hiện tại là số cố định nên tester chỉ cần đối chiếu 350000.
+
+#### B.6 Tiền thuê đất / nhà xưởng / tài sản (từ hợp đồng `UAT-HD-*`)
+
+Lấy từ line item hợp đồng (`calculation_mode = contract_line`), VAT theo điều khoản hợp đồng (các hợp đồng IIT là 10%).
+
+```text
+Trước VAT = diện tích/số lượng × đơn giá (theo dòng thuê trong hợp đồng)
+VAT       = Trước VAT × VAT hợp đồng
+Tổng      = Trước VAT + VAT
+Ví dụ UAT-HD-LAND-2026-001: 10000 m2 × 85000 = 850000000; VAT 10% = 85000000; tổng = 935000000.
+Ví dụ UAT-HD-01: 10000 × 100 = 1000000; VAT 10% = 100000; tổng = 1100000.
+Ví dụ UAT-HD-ASSET-2026-001: 1 × 3500000 = 3500000; VAT 10% = 350000; tổng = 3850000.
+Ví dụ UAT-HD-SVC-2026-001: 3 dòng dịch vụ 11433000 + 2812500 + 1875000 = 16120500 trước VAT (VAT tính riêng từng dòng 10%/5%/5%).
+```
+
+- Chú thích: tiền cọc (ví dụ 1700000000) không cộng vào tiền thuê kỳ này. Chu kỳ (tháng/quý) và ngày đến hạn (ngày 10/15) chỉ quyết định kỳ nào phải trả, không đổi đơn giá.
+
+#### B.7 Tổng hợp run, thông báo phí, phải thu
+
+```text
+Run BR-UAT-KTP-T09-001 (trạng thái completed):
+Tổng trước VAT = Điện + Nước + Nước thải + Rác + Dịch vụ hạ tầng (+ tiền thuê nếu kỳ có)
+Tổng VAT       = VAT từng dòng cộng lại
+Tổng phải thu  = Tổng trước VAT + Tổng VAT
+Thông báo phí TBP-UAT-KTP-T09-IIT: phát hành 01/10/2026, đến hạn 15/10/2026, trạng thái issued, mang 3 số trên.
+Phải thu REC-UAT-KTP-T09-IIT = Tổng phải thu, ban đầu open.
+Thanh toán PAY-UAT-IIT-2026-10-001: 10000000 vào REC → đã thu 10000000, còn 10756205, trạng thái partial.
+Không cho phân bổ vượt số còn lại; kỳ đã đóng (closed) thì không cho sửa/chạy lại.
+```
+
+- Chú thích số seed: mục 3.7 ghi bộ run kỳ vọng điện 12926000 / nước 2812500 / nước thải 1435000 / rác 1875000 / hạ tầng 350000 → trước VAT 19398500, VAT 1357705, tổng 20756205. Bộ này dùng đầu vào khác bộ COSφ phạt ở B.1 (điện 21808500 trước VAT). Khi test live ra số khác seed thì lấy số live tính đúng công thức trên làm chuẩn, ghi chú "số live theo B.1, khác ví dụ seed 3.7 do khác đầu vào", đừng báo Fail vội. Tester UAT-05.03/UAT-05.04 đối chiếu theo 5 bước B.0→B.7 thay vì học thuộc con số.
